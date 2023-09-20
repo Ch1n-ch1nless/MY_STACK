@@ -38,6 +38,5 @@ unsigned int StackPush(Stack* stk, elem_t new_value);
 unsigned int StackPop(Stack* stk, elem_t* ret_value);
 unsigned int StackRealloc(Stack* stk);
 void PrintStack(Stack* stk);
-void StackCopy(Stack* dest, Stack* src);
 
 #endif // STACK_H_INCLUDED

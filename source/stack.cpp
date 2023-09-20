@@ -9,7 +9,7 @@ unsigned int StackVerify(Stack* stk)
         error |= NULL_STK_ERR;
     if (stk->data == nullptr)
         error |= NULL_ARR_ERR;
-    if (stk->capacity < 0)
+    if (stk->capacity <= 0)
         error |= MINUS_CAPACITY_ERR;
     if (stk->size < 0)
         error |= MINUS_SIZE_ERR;
@@ -107,7 +107,8 @@ void PrintStack(Stack* stk)
     assert(stk);
     assert(stk->data);
 
-    printf("Stack:\n");
+    printf("Stack: [%p]\n", stk);
+    printf("\tData     = [%p]\n", stk->data);
     printf("\tSize     = %d\n", stk->size);
     printf("\tCapacity = %d\n", stk->capacity);
     printf("Elements:\n");
