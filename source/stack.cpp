@@ -2,6 +2,8 @@
 
 unsigned int StackVerify(Stack* stk)
 {
+    assert(stk);
+
     unsigned int error = 0;
     if (stk == nullptr)
         error |= NULL_STK_ERR;
@@ -19,6 +21,8 @@ unsigned int StackVerify(Stack* stk)
 
 unsigned int StackCtor(Stack* stk)
 {
+    assert(stk);
+
     stk->size = 0;
     stk->capacity = 1;
     stk->data = (elem_t*) calloc(stk->capacity, sizeof(elem_t));
@@ -30,6 +34,8 @@ unsigned int StackCtor(Stack* stk)
 
 unsigned int StackDtor(Stack* stk)
 {
+    assert(stk);
+
     unsigned int error = StackVerify(stk);
     if (error)
         return error;
@@ -42,11 +48,14 @@ unsigned int StackDtor(Stack* stk)
 
 unsigned int StackPush(Stack* stk, elem_t new_value)
 {
+    assert(stk);
+    assert(stk->data);
+
     if (stk->size >= stk->capacity)
     {
         unsigned int error = StackRealloc(stk);
-        /*if (error != 0)
-            return error;*/
+        if (error != 0)
+            return error;
     }
     stk->data[stk->size] = new_value;
     stk->size++;
@@ -55,6 +64,10 @@ unsigned int StackPush(Stack* stk, elem_t new_value)
 
 unsigned int StackPop(Stack* stk, elem_t* ret_value)
 {
+    assert(stk);
+    assert(stk->data);
+    assert(ret_value);
+
     if (stk->size == 0) {
         *ret_value = POISON_VALUE;
         return MINUS_SIZE_ERR;
@@ -73,6 +86,9 @@ unsigned int StackPop(Stack* stk, elem_t* ret_value)
 
 unsigned int StackRealloc(Stack* stk)
 {
+    assert(stk);
+    assert(stk->data);
+
     if (stk->size >= stk->capacity) {
         stk->capacity *= 2;
     } else if (stk->size <= (stk->capacity / 4))  {
@@ -80,17 +96,17 @@ unsigned int StackRealloc(Stack* stk)
     } else {
         return NO_ERR;
     }
-    Stack temp_stk = {nullptr, -1, -1};
-    temp_stk.data = (elem_t*) realloc(stk->data, stk->capacity);
-    if (temp_stk.data == nullptr)
-        return MEM_ALLOC_ERR;
-    StackCopy(&temp_stk, stk);
-    PrintStack(stk);
+
+    stk->data = (elem_t*) realloc(stk->data, stk->capacity * sizeof(elem_t));
+
     return NO_ERR;
 }
 
 void PrintStack(Stack* stk)
 {
+    assert(stk);
+    assert(stk->data);
+
     printf("Stack:\n");
     printf("\tSize     = %d\n", stk->size);
     printf("\tCapacity = %d\n", stk->capacity);
@@ -102,14 +118,4 @@ void PrintStack(Stack* stk)
         printf("\t [%d] = " elem_format "\n", i, stk->data[i]);
     }
     printf("--------------------\n");
-}
-
-void StackCopy(Stack* dest, Stack* src)
-{
-    dest->size = src->size;
-    dest->capacity = src->capacity;
-    for (int i = 0; i < dest->size; i++) {
-        dest->data[i] = src->data[i];
-    }
-    src = dest;
 }

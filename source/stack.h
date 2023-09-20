@@ -4,8 +4,10 @@
 #define elem_t int
 #define elem_format "%d"
 
+#include <assert.h>
 #include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <TXLib.h>
 
 struct Stack
