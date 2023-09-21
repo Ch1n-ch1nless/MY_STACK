@@ -1,6 +1,6 @@
 #include "stack.h"
 
-int main()
+int main()  // hey, do not push .o files on Github, just add whole object directory to .gitignore!
 {
     Stack stk = {.data = nullptr,
                  .size = -1,
