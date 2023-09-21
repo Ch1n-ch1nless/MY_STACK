@@ -1,6 +1,6 @@
 #include "stack.h"
 
-unsigned int StackVerify(Stack* stk)
+error_t StackVerify(Stack* stk)
 {
     assert(stk);
 
@@ -19,7 +19,7 @@ unsigned int StackVerify(Stack* stk)
     return error;
 }
 
-unsigned int StackCtor(Stack* stk)
+error_t StackCtor(Stack* stk)
 {
     assert(stk);
     size_t error = NO_ERR;
@@ -34,11 +34,11 @@ unsigned int StackCtor(Stack* stk)
     return error;
 }
 
-unsigned int StackDtor(Stack* stk)
+error_t StackDtor(Stack* stk)
 {
     assert(stk);
 
-    unsigned int error = StackVerify(stk);
+    error_t error = StackVerify(stk);
     if (error) {
         PRINT_ERROR(stk, error)
         return error;
@@ -50,7 +50,7 @@ unsigned int StackDtor(Stack* stk)
     return NO_ERR;
 }
 
-unsigned int StackPush(Stack* stk, elem_t new_value)
+error_t StackPush(Stack* stk, elem_t new_value)
 {
     assert(stk);
     assert(stk->data);
@@ -68,30 +68,30 @@ unsigned int StackPush(Stack* stk, elem_t new_value)
     return (int) NO_ERR;
 }
 
-unsigned int StackPop(Stack* stk, elem_t* ret_value)
+error_t StackPop(Stack* stk, elem_t* ret_value)
 {
-    assert(stk);
-    assert(stk->data);
     assert(ret_value);
+
+
 
     if (stk->size == 0) {
         *ret_value = POISON_VALUE;
         return MINUS_SIZE_ERR;
-    } else {
-        *ret_value = stk->data[stk->size-1];
-        stk->size--;
-        stk->data[stk->size] = POISON_VALUE;
-        if (stk->size <= (stk->capacity / 4)) {
-            unsigned int error = StackRealloc(stk);
-            if (error)
-                PRINT_ERROR(stk, error);
-                return error;
-        }
+    }
+
+    *ret_value = stk->data[stk->size-1];
+    stk->size--;
+    stk->data[stk->size] = POISON_VALUE;
+    if (stk->size <= (stk->capacity / 4)) {
+        unsigned int error = StackRealloc(stk);
+        if (error)
+            PRINT_ERROR(stk, error);
+            return error;
     }
     return NO_ERR;
 }
 
-unsigned int StackRealloc(Stack* stk)
+error_t StackRealloc(Stack* stk)
 {
     assert(stk);
     assert(stk->data);
@@ -117,7 +117,7 @@ unsigned int StackRealloc(Stack* stk)
     return NO_ERR;
 }
 
-unsigned int PrintStack(Stack* stk)
+error_t PrintStack(Stack* stk)
 {
     assert(stk);
 
@@ -143,7 +143,7 @@ unsigned int PrintStack(Stack* stk)
     return NO_ERR;
 }
 
-void PrintError(Stack* stk, unsigned int error, const char* file, const char* function, const int line)
+void PrintError(Stack* stk, error_t error, const char* file, const char* function, const int line)
 {
     fprintf(stderr, "In main.cpp called from %s(%d) in function: %s\n", file, line, function);
 

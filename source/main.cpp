@@ -28,7 +28,7 @@ int main()
     }
     printf("========================================\n");
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 5; i++) {
         elem_t old_value = 0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
