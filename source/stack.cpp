@@ -4,7 +4,7 @@ unsigned int StackVerify(Stack* stk)
 {
     assert(stk);
 
-    unsigned int error = 0;
+    unsigned int error = NO_ERR;
     if (stk == nullptr)
         error |= NULL_STK_ERR;
     if (stk->data == nullptr)
@@ -22,14 +22,16 @@ unsigned int StackVerify(Stack* stk)
 unsigned int StackCtor(Stack* stk)
 {
     assert(stk);
+    size_t error = NO_ERR;
 
     stk->size = 0;
     stk->capacity = 1;
     stk->data = (elem_t*) calloc(stk->capacity, sizeof(elem_t));
     if (stk->data == nullptr) {
-        return MEM_ALLOC_ERR;
+        error = MEM_ALLOC_ERR;
+        PRINT_ERROR(stk, error)
     }
-    return NO_ERR;
+    return error;
 }
 
 unsigned int StackDtor(Stack* stk)
@@ -37,8 +39,10 @@ unsigned int StackDtor(Stack* stk)
     assert(stk);
 
     unsigned int error = StackVerify(stk);
-    if (error)
+    if (error) {
+        PRINT_ERROR(stk, error)
         return error;
+    }
     free(stk->data);
     stk->data = nullptr;
     stk->size = -1;
@@ -54,8 +58,10 @@ unsigned int StackPush(Stack* stk, elem_t new_value)
     if (stk->size >= stk->capacity)
     {
         unsigned int error = StackRealloc(stk);
-        if (error != 0)
+        if (error != NO_ERR) {
+            PRINT_ERROR(stk, error)
             return error;
+        }
     }
     stk->data[stk->size] = new_value;
     stk->size++;
@@ -78,6 +84,7 @@ unsigned int StackPop(Stack* stk, elem_t* ret_value)
         if (stk->size <= (stk->capacity / 4)) {
             unsigned int error = StackRealloc(stk);
             if (error)
+                PRINT_ERROR(stk, error);
                 return error;
         }
     }
@@ -97,26 +104,72 @@ unsigned int StackRealloc(Stack* stk)
         return NO_ERR;
     }
 
+    size_t error = StackVerify(stk);
+    if (error != NO_ERR) {
+        PRINT_ERROR(stk, error)
+        return error;
+    }
     stk->data = (elem_t*) realloc(stk->data, stk->capacity * sizeof(elem_t));
+    for (size_t i = stk->size; i < stk->capacity; i++) {
+        stk->data[i] = POISON_VALUE;
+    }
 
     return NO_ERR;
 }
 
-void PrintStack(Stack* stk)
+unsigned int PrintStack(Stack* stk)
 {
     assert(stk);
-    assert(stk->data);
 
-    printf("Stack: [%p]\n", stk);
-    printf("\tData     = [%p]\n", stk->data);
+    size_t error = StackVerify(stk);
+    if (error != NO_ERR) {
+        PRINT_ERROR(stk, error);
+        return error;
+    }
+
+    printf("Stack: [%p]\n{\n", stk);
     printf("\tSize     = %d\n", stk->size);
     printf("\tCapacity = %d\n", stk->capacity);
-    printf("Elements:\n");
+    printf("\tData     = [%p]\n", stk->data);
+    printf("\tElements of Data:\n\t{\n");
     for (int i = 0; i < stk->size; i++) {
-        printf("\t*[%d] = " elem_format "\n", i, stk->data[i]);
+        printf("\t *[%d] = " elem_format "\n", i, stk->data[i]);
     }
     for (int i = stk->size; i < stk->capacity; i++) {
-        printf("\t [%d] = " elem_format "\n", i, stk->data[i]);
+        printf("\t  [%d] = " elem_format "\n", i, stk->data[i]);
     }
-    printf("--------------------\n");
+    printf("\t}\n}\n");
+
+    return NO_ERR;
 }
+
+void PrintError(Stack* stk, unsigned int error, const char* file, const char* function, const int line)
+{
+    fprintf(stderr, "In main.cpp called from %s(%d) in function: %s\n", file, line, function);
+
+    if (error & OPEN_FILE_ERR) {
+        printf("Program can NOT open file\n");
+    }
+    if (error & MEM_ALLOC_ERR) {
+        printf("Program can NOT allocate memory\n");
+    }
+    if (error & NULL_STK_ERR) {
+        printf("Pointer to Stack is nullptr\n");
+        return;
+    }
+    if (error & NULL_ARR_ERR) {
+        printf("Pointer to array in Stack is nullptr\n");
+    }
+    if (error & MINUS_CAPACITY_ERR) {
+        printf("Capacity in Stack = %d\n", stk->capacity);
+    }
+    if (error & MINUS_SIZE_ERR) {
+        printf("Size in Stack = %d\n", stk->size);
+    }
+    if (error & CAPACITY_FEWER_SIZE_ERR) {
+        printf("Size in Stack     = %d\n"
+               "Capacity in Stack = %d\n"
+               "Capacity < Size\n", stk->size, stk->capacity);
+    }
+}
+

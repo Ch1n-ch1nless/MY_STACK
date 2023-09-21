@@ -15,24 +15,32 @@ int main()
         return error;
     }
 
-    for (int i = 0; i < 16; i++) {
-        printf("===Push the Element %d===\n", i);
+    for (int i = 0; i < 4; i++) {
+        printf("----------------------------------------\n");
+        printf("\tPush the Element [\033[32m%d\033[0m]\n", i);
         error = StackPush(&stk, i);
         if (error != 0) {
-            //PrintErrors(error);
+            PRINT_ERROR(&stk, error)
             return error;
         }
         PrintStack(&stk);
+        printf("----------------------------------------\n");
     }
-    printf("===========================\n");
+    printf("========================================\n");
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 4; i++) {
         elem_t old_value = 0;
-        StackPop(&stk, &old_value);
-        printf("===Pop the Element %d===\n", old_value);
+        error = StackPop(&stk, &old_value);
+        printf("----------------------------------------\n");
+        printf("\tPop the Element [\033[31m%d\033[0m]\n", old_value);
+        if (error != 0) {
+            PRINT_ERROR(&stk, error)
+            return error;
+        }
         PrintStack(&stk);
+        printf("----------------------------------------\n");
     }
-    printf("===========================\n");
+    printf("========================================\n");
 
     StackDtor(&stk);
 
