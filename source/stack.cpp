@@ -4,7 +4,7 @@ error_t StackVerify(Stack* stk)
 {
     assert(stk);
 
-    unsigned int error = NO_ERR;
+    error_t error = NO_ERR;
     if (stk == nullptr)
         error |= NULL_STK_ERR;
     if (stk->data == nullptr)
@@ -22,7 +22,7 @@ error_t StackVerify(Stack* stk)
 error_t StackCtor(Stack* stk)
 {
     assert(stk);
-    size_t error = NO_ERR;
+    error_t error = NO_ERR;
 
     stk->size = 0;
     stk->capacity = 1;
@@ -72,8 +72,6 @@ error_t StackPop(Stack* stk, elem_t* ret_value)
 {
     assert(ret_value);
 
-
-
     if (stk->size == 0) {
         *ret_value = POISON_VALUE;
         return MINUS_SIZE_ERR;
@@ -104,7 +102,7 @@ error_t StackRealloc(Stack* stk)
         return NO_ERR;
     }
 
-    size_t error = StackVerify(stk);
+    error_t error = StackVerify(stk);
     if (error != NO_ERR) {
         PRINT_ERROR(stk, error)
         return error;
@@ -121,7 +119,7 @@ error_t PrintStack(Stack* stk)
 {
     assert(stk);
 
-    size_t error = StackVerify(stk);
+    error_t error = StackVerify(stk);
     if (error != NO_ERR) {
         PRINT_ERROR(stk, error);
         return error;

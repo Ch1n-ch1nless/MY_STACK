@@ -1,12 +1,12 @@
 #include "stack.h"
 
-int main()  // hey, do not push .o files on Github, just add whole object directory to .gitignore!
+int main()
 {
     Stack stk = {.data = nullptr,
                  .size = -1,
                  .capacity = -1};
 
-    unsigned int error = NO_ERR;
+    error_t error = NO_ERR;
 
     error = StackCtor(&stk);
 

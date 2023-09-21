@@ -1,18 +1,17 @@
 #ifndef STACK_H_INCLUDED
 #define STACK_H_INCLUDED
 
-#define elem_t int                                                                          // do struct StackElemParameters, put elem_t and elem_format (and POISON_VALUE)
-#define elem_format "%d"                                                                    // there and put struct declaration under #ifdef STACK_USES_INT;
-                                                                                            // btw why not typedef instead of define for elem_t? it's more explicit
+typedef int elem_t;
+#define elem_format "%d"
+
 #define PRINT_ERROR(stk, error) PrintError(stk, error, __FILE__, __FUNCTION__, __LINE__);
 
-typedef error_t unsigned long long
+typedef unsigned long long error_t;
 
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-// #include <TXLib.h>
 
 struct Stack
 {
@@ -48,8 +47,8 @@ error_t StackPop(Stack* stk, elem_t* ret_value);
 error_t StackRealloc(Stack* stk);
 
 error_t PrintStack(Stack* stk);
-   void PrintError(Stack* stk, unsigned int error, const char* file,
-                                                   const char* function,
-                                                   const int line);
+   void PrintError(Stack* stk, error_t error, const char* file,
+                                              const char* function,
+                                              const int line);
 
 #endif // STACK_H_INCLUDED
