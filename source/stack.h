@@ -1,15 +1,16 @@
 #ifndef STACK_H_INCLUDED
 #define STACK_H_INCLUDED
 
-#define elem_t int
-#define elem_format "%d"
+#define elem_t int                                                                          // do struct StackElemParameters, put elem_t and elem_format (and POISON_VALUE)
+#define elem_format "%d"                                                                    // there and put struct declaration under #ifdef STACK_USES_INT;
+                                                                                            // btw why not typedef instead of define for elem_t? it's more explicit
 #define PRINT_ERROR(stk, error) PrintError(stk, error, __FILE__, __FUNCTION__, __LINE__);
 
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <TXLib.h>
+// #include <TXLib.h>
 
 struct Stack
 {
@@ -18,7 +19,7 @@ struct Stack
     int capacity;
 };
 
-enum ERRORS
+enum ERRORS : unsigned int
 {
     NO_ERR                  = 0,
     NULL_STK_ERR            = 1,
@@ -32,7 +33,7 @@ enum ERRORS
     END_OF_ENUM
 };
 
-const elem_t POISON_VALUE = -1;
+const elem_t POISON_VALUE = -1;                                                             // also to StackElemParameters
 
 unsigned int StackVerify(Stack* stk);
 

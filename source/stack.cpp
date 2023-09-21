@@ -1,9 +1,11 @@
 #include "stack.h"
 
-unsigned int StackVerify(Stack* stk)
-{
-    assert(stk);
+unsigned int StackVerify(Stack* stk)    // i beieve the problem with returning ERRORS or enum ERRORS is that it is might be implemented via signed type whilst
+{                                       // you use bit operations. first of all, it does not matter unless you use bit shifts (now you do not); but if you
+                                        // want to use exactly unsigned int, you could write something like enum ERRORS : unsigned int in file stackl.h
 
+    assert(stk);                        // hey, here could be something like STACK_NULL_PTR_CHECK define with return instead of simply killing program!
+                                        // assert is the most primitive form of protection, but you can do better!
     unsigned int error = NO_ERR;
     if (stk == nullptr)
         error |= NULL_STK_ERR;
@@ -25,7 +27,8 @@ unsigned int StackCtor(Stack* stk)
     size_t error = NO_ERR;
 
     stk->size = 0;
-    stk->capacity = 1;
+    stk->capacity = 1;  // what if i need to create an array of empty stacks of size 1'000'000? it will momentally require additional 1'000'000 * sizeof(elem_t) bytes.
+                        // what if sizeof(elem_t) is big?
     stk->data = (elem_t*) calloc(stk->capacity, sizeof(elem_t));
     if (stk->data == nullptr) {
         error = MEM_ALLOC_ERR;
@@ -65,7 +68,7 @@ unsigned int StackPush(Stack* stk, elem_t new_value)
     }
     stk->data[stk->size] = new_value;
     stk->size++;
-    return (int) NO_ERR;
+    return (int) NO_ERR;    // why cast to int?
 }
 
 unsigned int StackPop(Stack* stk, elem_t* ret_value)
@@ -81,7 +84,7 @@ unsigned int StackPop(Stack* stk, elem_t* ret_value)
         *ret_value = stk->data[stk->size-1];
         stk->size--;
         stk->data[stk->size] = POISON_VALUE;
-        if (stk->size <= (stk->capacity / 4)) {
+        if (stk->size <= (stk->capacity / 4)) {         // magic number :(
             unsigned int error = StackRealloc(stk);
             if (error)
                 PRINT_ERROR(stk, error);
@@ -97,7 +100,7 @@ unsigned int StackRealloc(Stack* stk)
     assert(stk->data);
 
     if (stk->size >= stk->capacity) {
-        stk->capacity *= 2;
+        stk->capacity *= 2;                             // magic numbers
     } else if (stk->size <= (stk->capacity / 4))  {
         stk->capacity /= 2;
     } else {
@@ -105,11 +108,11 @@ unsigned int StackRealloc(Stack* stk)
     }
 
     size_t error = StackVerify(stk);
-    if (error != NO_ERR) {
-        PRINT_ERROR(stk, error)
-        return error;
-    }
-    stk->data = (elem_t*) realloc(stk->data, stk->capacity * sizeof(elem_t));
+    if (error != NO_ERR) {      //  hey, i'm tired to see this block in the code; why not using define to avoid copypaste? 
+        PRINT_ERROR(stk, error) //
+        return error;           //
+    }                           //
+    stk->data = (elem_t*) realloc(stk->data, stk->capacity * sizeof(elem_t));   // what if realloc did not work properly?
     for (size_t i = stk->size; i < stk->capacity; i++) {
         stk->data[i] = POISON_VALUE;
     }
