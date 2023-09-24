@@ -1,98 +1,117 @@
 #include "stack.h"
 
-error_t StackVerify(Stack* stk)
+error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int   line)
 {
-    assert(stk);
-
-    error_t error = NO_ERR;
-    if (stk == nullptr)
-        error |= NULL_STK_ERR;
-    if (stk->data == nullptr)
-        error |= NULL_ARR_ERR;
-    if (stk->capacity <= 0)
-        error |= MINUS_CAPACITY_ERR;
-    if (stk->size < 0)
-        error |= MINUS_SIZE_ERR;
-    if (stk->size > stk->capacity)
-        error |= CAPACITY_FEWER_SIZE_ERR;
-
-    return error;
-}
-
-error_t StackCtor(Stack* stk)
-{
-    assert(stk);
     error_t error = NO_ERR;
 
+    stk->left_canary  = LEFT_CANARY_VALUE;
+    stk->right_canary = RIGHT_CANARY_VALUE;
     stk->size = 0;
     stk->capacity = 1;
-    stk->data = (elem_t*) calloc(stk->capacity, sizeof(elem_t));
+
+    stk->data = (char*) calloc(stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t), sizeof(char));
+
+    stk->name = stk_name;
+    stk->file = file;
+    stk->line = line;
+
     if (stk->data == nullptr) {
-        error = MEM_ALLOC_ERR;
-        PRINT_ERROR(stk, error)
+        error |= MEM_ALLOC_ERR;
+    } else {
+        SetStkDataIntro(stk, INTRO_CANARY_VALUE);
+        SetStkDataOutro(stk, OUTRO_CANARY_VALUE);
     }
+
+    error |= StackVerify(stk);
+    if (error != NO_ERR)
+        PRINT_ERROR(stk, error)
     return error;
 }
 
 error_t StackDtor(Stack* stk)
 {
-    assert(stk);
-
     error_t error = StackVerify(stk);
     if (error) {
         PRINT_ERROR(stk, error)
         return error;
     }
-    free(stk->data);
+
+    stk->left_canary  = POISON_CANARY_VALUE;
+    stk->right_canary = POISON_CANARY_VALUE;
+
+    canary_t* temp_ptr = (canary_t*) stk->data;
+    free(temp_ptr);
+    temp_ptr = nullptr;
     stk->data = nullptr;
+
     stk->size = -1;
     stk->capacity = -1;
+    stk->name = nullptr;
+    stk->file = nullptr;
+    stk->line = -1;
+
     return NO_ERR;
 }
 
 error_t StackPush(Stack* stk, elem_t new_value)
 {
-    assert(stk);
-    assert(stk->data);
+    error_t error = StackVerify(stk);
+    if (error) {
+        PRINT_ERROR(stk, error);
+        return error;
+    }
 
     if (stk->size >= stk->capacity)
     {
-        unsigned int error = StackRealloc(stk);
+        error |= StackRealloc(stk);
         if (error != NO_ERR) {
             PRINT_ERROR(stk, error)
             return error;
         }
     }
-    stk->data[stk->size] = new_value;
+    SetStkDataElemT(stk, stk->size, new_value);
     stk->size++;
-    return (int) NO_ERR;
+
+    return NO_ERR;
 }
 
 error_t StackPop(Stack* stk, elem_t* ret_value)
 {
     assert(ret_value);
+    error_t error = StackVerify(stk);
+    if (error) {
+        PRINT_ERROR(stk, error);
+        return error;
+    }
 
     if (stk->size == 0) {
         *ret_value = POISON_VALUE;
-        return MINUS_SIZE_ERR;
+        error |= MINUS_SIZE_ERR;
+        PRINT_ERROR(stk, error)
+        return error;
     }
 
-    *ret_value = stk->data[stk->size-1];
+    *ret_value = GetStkDataElemT(stk, stk->size-1);
     stk->size--;
-    stk->data[stk->size] = POISON_VALUE;
+    SetStkDataElemT(stk, stk->size, POISON_VALUE);
     if (stk->size <= (stk->capacity / 4)) {
-        unsigned int error = StackRealloc(stk);
-        if (error)
+        error |= StackRealloc(stk);
+        if (error) {
             PRINT_ERROR(stk, error);
             return error;
+        }
     }
+
     return NO_ERR;
 }
 
 error_t StackRealloc(Stack* stk)
 {
-    assert(stk);
-    assert(stk->data);
+    error_t error = StackVerify(stk);
+    if (error) {
+        PRINT_ERROR(stk, error);
+        return error;
+    }
 
     if (stk->size >= stk->capacity) {
         stk->capacity *= 2;
@@ -102,72 +121,45 @@ error_t StackRealloc(Stack* stk)
         return NO_ERR;
     }
 
-    error_t error = StackVerify(stk);
-    if (error != NO_ERR) {
+    stk->data = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t));
+    if (stk->data == nullptr) {
+        error |= MEM_ALLOC_ERR;
         PRINT_ERROR(stk, error)
-        return error;
     }
-    stk->data = (elem_t*) realloc(stk->data, stk->capacity * sizeof(elem_t));
+
     for (size_t i = stk->size; i < stk->capacity; i++) {
-        stk->data[i] = POISON_VALUE;
+        SetStkDataElemT(stk, i, POISON_VALUE);
     }
+    SetStkDataIntro(stk, INTRO_CANARY_VALUE);
+    SetStkDataOutro(stk, OUTRO_CANARY_VALUE);
 
     return NO_ERR;
 }
 
-error_t PrintStack(Stack* stk)
+error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
+                               const char* function, const int   line)
 {
-    assert(stk);
-
     error_t error = StackVerify(stk);
     if (error != NO_ERR) {
         PRINT_ERROR(stk, error);
         return error;
     }
 
-    printf("Stack: [%p]\n{\n", stk);
+    printf("Stack \"%s\": [%p] from %s(%d)\n", stk->name, stk, stk->file, stk->line);
+    printf("called from file: %s(%d) in function: %s\n{\n", file, line, function);
+    printf("\tLeft Canary =  %X\n", stk->left_canary);
+    printf("\tRight Canary = %X\n", stk->right_canary);
     printf("\tSize     = %d\n", stk->size);
     printf("\tCapacity = %d\n", stk->capacity);
     printf("\tData     = [%p]\n", stk->data);
     printf("\tElements of Data:\n\t{\n");
-    for (int i = 0; i < stk->size; i++) {
-        printf("\t *[%d] = " elem_format "\n", i, stk->data[i]);
+    printf(" Left canary(Intro) = %X\n", GetStkDataIntro(stk));
+    for (int i = 0; i < stk->capacity; i++) {
+        PrintStkDataElemT(stk, i);
     }
-    for (int i = stk->size; i < stk->capacity; i++) {
-        printf("\t  [%d] = " elem_format "\n", i, stk->data[i]);
-    }
+    printf(" Right canary(Outro) = %X\n", GetStkDataOutro(stk));
     printf("\t}\n}\n");
 
     return NO_ERR;
-}
-
-void PrintError(Stack* stk, error_t error, const char* file, const char* function, const int line)
-{
-    fprintf(stderr, "In main.cpp called from %s(%d) in function: %s\n", file, line, function);
-
-    if (error & OPEN_FILE_ERR) {
-        printf("Program can NOT open file\n");
-    }
-    if (error & MEM_ALLOC_ERR) {
-        printf("Program can NOT allocate memory\n");
-    }
-    if (error & NULL_STK_ERR) {
-        printf("Pointer to Stack is nullptr\n");
-        return;
-    }
-    if (error & NULL_ARR_ERR) {
-        printf("Pointer to array in Stack is nullptr\n");
-    }
-    if (error & MINUS_CAPACITY_ERR) {
-        printf("Capacity in Stack = %d\n", stk->capacity);
-    }
-    if (error & MINUS_SIZE_ERR) {
-        printf("Size in Stack = %d\n", stk->size);
-    }
-    if (error & CAPACITY_FEWER_SIZE_ERR) {
-        printf("Size in Stack     = %d\n"
-               "Capacity in Stack = %d\n"
-               "Capacity < Size\n", stk->size, stk->capacity);
-    }
 }
 

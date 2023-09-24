@@ -2,45 +2,36 @@
 
 int main()
 {
-    Stack stk = {.data = nullptr,
+    Stack stk = {.left_canary = POISON_CANARY_VALUE,
+                 .data = nullptr,
                  .size = -1,
-                 .capacity = -1};
+                 .capacity = -1,
+                 .name = nullptr,
+                 .file = nullptr,
+                 .line = -1,
+                 .right_canary = POISON_CANARY_VALUE};
 
     error_t error = NO_ERR;
 
-    error = StackCtor(&stk);
-
-    if (error != NO_ERR) {
-        printf("ERROR is %d", error);
-        return error;
-    }
+    error = STACK_CTOR(&stk);
+    PRINT_STACK(&stk)
 
     for (int i = 0; i < 4; i++) {
+        error = StackPush(&stk, i);
         printf("----------------------------------------\n");
         printf("\tPush the Element [\033[32m%d\033[0m]\n", i);
-        error = StackPush(&stk, i);
-        if (error != 0) {
-            PRINT_ERROR(&stk, error)
-            return error;
-        }
-        PrintStack(&stk);
+        PRINT_STACK(&stk)
         printf("----------------------------------------\n");
     }
-    printf("========================================\n");
 
     for (int i = 0; i < 5; i++) {
         elem_t old_value = 0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
         printf("\tPop the Element [\033[31m%d\033[0m]\n", old_value);
-        if (error != 0) {
-            PRINT_ERROR(&stk, error)
-            return error;
-        }
-        PrintStack(&stk);
+        PRINT_STACK(&stk)
         printf("----------------------------------------\n");
     }
-    printf("========================================\n");
 
     StackDtor(&stk);
 

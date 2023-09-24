@@ -1,2 +1,3 @@
-.o
+object/main.o
+object/stack.o
 *.exe
