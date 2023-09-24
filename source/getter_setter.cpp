@@ -1,4 +1,5 @@
 #include "getter_setter.h"
+#include "struct_and_const.h"
 
 canary_t GetStkDataIntro(const Stack* stk)
 {
@@ -51,10 +52,10 @@ elem_t GetStkDataElemT(const Stack* stk, const size_t index)
     return temp_ptr[index];
 }
 
-void SetStkDataElemT(Stack* stk, const size_t index, const elem_t new_value)
+void SetStkDataElemT(Stack* stk, const size_t index, elem_t new_value)
 {
     assert(stk);
-    assert(stk->data);;
+    assert(stk->data);
 
     canary_t* temp_ptr1 = (canary_t*) stk->data;
     temp_ptr1++;

@@ -1,4 +1,5 @@
 #include "errors.h"
+#include "struct_and_const.h"
 
 error_t StackVerify(Stack* stk)
 {

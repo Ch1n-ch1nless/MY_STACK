@@ -23,5 +23,5 @@ $(OBJ_DIR)%.o : $(SRC_DIR)%.cpp
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm $(OBJ) *.exe
+	rm $(OBJ)  
 

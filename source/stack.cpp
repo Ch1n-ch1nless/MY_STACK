@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "getter_setter.h"
 
 error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int   line)
 {
@@ -7,7 +8,7 @@ error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int 
     stk->left_canary  = LEFT_CANARY_VALUE;
     stk->right_canary = RIGHT_CANARY_VALUE;
     stk->size = 0;
-    stk->capacity = 1;
+    stk->capacity = 4;
 
     stk->data = (char*) calloc(stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t), sizeof(char));
 
@@ -20,6 +21,9 @@ error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int 
     } else {
         SetStkDataIntro(stk, INTRO_CANARY_VALUE);
         SetStkDataOutro(stk, OUTRO_CANARY_VALUE);
+    }
+    for (int i = 0; i < stk->capacity; i++) {
+        SetStkDataElemT(stk, i, POISON_VALUE);
     }
 
     error |= StackVerify(stk);
@@ -39,9 +43,7 @@ error_t StackDtor(Stack* stk)
     stk->left_canary  = POISON_CANARY_VALUE;
     stk->right_canary = POISON_CANARY_VALUE;
 
-    canary_t* temp_ptr = (canary_t*) stk->data;
-    free(temp_ptr);
-    temp_ptr = nullptr;
+    free(stk->data);
     stk->data = nullptr;
 
     stk->size = -1;
@@ -153,11 +155,11 @@ error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
     printf("\tCapacity = %d\n", stk->capacity);
     printf("\tData     = [%p]\n", stk->data);
     printf("\tElements of Data:\n\t{\n");
-    printf(" Left canary(Intro) = %X\n", GetStkDataIntro(stk));
+    printf("\t Left canary(Intro) = %X\n", GetStkDataIntro(stk));
     for (int i = 0; i < stk->capacity; i++) {
         PrintStkDataElemT(stk, i);
     }
-    printf(" Right canary(Outro) = %X\n", GetStkDataOutro(stk));
+    printf("\t Right canary(Outro) = %X\n", GetStkDataOutro(stk));
     printf("\t}\n}\n");
 
     return NO_ERR;

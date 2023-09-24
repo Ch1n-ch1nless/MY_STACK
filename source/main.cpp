@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "struct_and_const.h"
 
 int main()
 {
@@ -16,19 +17,20 @@ int main()
     error = STACK_CTOR(&stk);
     PRINT_STACK(&stk)
 
-    for (int i = 0; i < 4; i++) {
-        error = StackPush(&stk, i);
+    for (int i = 0; i < 8; i++) {
+        elem_t c = i + .5;
+        error = StackPush(&stk, c);
         printf("----------------------------------------\n");
-        printf("\tPush the Element [\033[32m%d\033[0m]\n", i);
+        printf("\tPush the Element [\033[32m" elem_format "\033[0m]\n", c);
         PRINT_STACK(&stk)
         printf("----------------------------------------\n");
     }
 
-    for (int i = 0; i < 5; i++) {
-        elem_t old_value = 0;
+    for (int i = 0; i < 8; i++) {
+        elem_t old_value = .0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
-        printf("\tPop the Element [\033[31m%d\033[0m]\n", old_value);
+        printf("\tPop the Element [\033[31m" elem_format "\033[0m]\n", old_value);
         PRINT_STACK(&stk)
         printf("----------------------------------------\n");
     }
