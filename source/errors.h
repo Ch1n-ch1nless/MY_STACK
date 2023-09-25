@@ -2,6 +2,7 @@
 #define ERRORS_H_INCLUDED
 
 #include "getter_setter.h"
+#include "log.h"
 
 #define PRINT_ERROR(stk, error) PrintError(stk, error, __FILE__, __FUNCTION__, __LINE__);
 
@@ -22,6 +23,7 @@ enum ERRORS : unsigned int
     LEFT_CANARY_DIED        = 1 << 11,
     WRONG_INTRO_ERR         = 1 << 12,
     WRONG_OUTRO_ERR         = 1 << 13,
+    WRONG_HASH              = 1 << 14,
 
     END_OF_ENUM
 };
@@ -32,5 +34,7 @@ error_t StackVerify(Stack* stk);
                                               const char* function,
                                               const int line);
    void PrintStkDataElemT(const Stack* stk, const size_t index);
+
+hash_t  CalculateStkHash(Stack* stk);
 
 #endif // ERRORS_H_INCLUDED

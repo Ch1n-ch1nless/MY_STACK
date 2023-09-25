@@ -30,6 +30,8 @@ error_t StackVerify(Stack* stk)
         error |= WRONG_INTRO_ERR;
     if (GetStkDataOutro(stk) != OUTRO_CANARY_VALUE)
         error |= WRONG_OUTRO_ERR;
+    if (stk->hash != CalculateStkHash(stk))
+        error |= WRONG_HASH;
 
     return error;
 }
@@ -50,53 +52,74 @@ void PrintStkDataElemT(const Stack* stk, const size_t index)
 
 void PrintError(Stack* stk, error_t error, const char* file, const char* function, const int line)
 {
-    fprintf(stderr, "In %s(%d) called from %s(%d) in function: %s\n",stk->file, stk->line, file, line, function);
+    FILE* log_file_ptr = OpenLogFile("errors");
+
+    fprintf(log_file_ptr, "In %s(%d) called from %s(%d) in function: %s\n",stk->file, stk->line, file, line, function);
 
     if (error & OPEN_FILE_ERR) {
-        printf("Program can NOT open file\n");
+        fprintf(log_file_ptr, "Program can NOT open file\n");
     }
     if (error & MEM_ALLOC_ERR) {
-        printf("Program can NOT allocate memory\n");
+        fprintf(log_file_ptr, "Program can NOT allocate memory\n");
     }
     if (error & NULL_STK_ERR) {
-        printf("Pointer to Stack is nullptr\n");
+        fprintf(log_file_ptr, "Pointer to Stack is nullptr\n");
         return;
     }
     if (error & NULL_ARR_ERR) {
-        printf("Pointer to array in Stack is nullptr\n");
+        fprintf(log_file_ptr, "Pointer to array in Stack is nullptr\n");
     }
     if (error & MINUS_CAPACITY_ERR) {
-        printf("Capacity in Stack = %d\n", stk->capacity);
+        fprintf(log_file_ptr, "Capacity in Stack = %d\n", stk->capacity);
     }
     if (error & MINUS_SIZE_ERR) {
-        printf("Size in Stack = %d\n", stk->size);
+        fprintf(log_file_ptr, "Size in Stack = %d\n", stk->size);
     }
     if (error & CAPACITY_FEWER_SIZE_ERR) {
-        printf("Size in Stack     = %d\n"
-               "Capacity in Stack = %d\n"
-               "Capacity < Size\n", stk->size, stk->capacity);
+        fprintf(log_file_ptr, "Size in Stack     = %d\n"
+                              "Capacity in Stack = %d\n"
+                              "Capacity < Size\n", stk->size, stk->capacity);
     }
     if (error & NULL_NAME_ERR) {
-        printf("Pointer to name of string is nullptr\n");
+        fprintf(log_file_ptr, "Pointer to name of string is nullptr\n");
     }
     if (error & NULL_FILE_ERR) {
-        printf("Pointer to name of string is nullptr\n");
+        fprintf(log_file_ptr, "Pointer to name of string is nullptr\n");
     }
     if (error & MINUS_LINE_ERR) {
-        printf("The line in file, which was made stack is %d\n", stk->line);
+        fprintf(log_file_ptr, "The line in file, which was made stack is %d\n", stk->line);
     }
     if (error & LEFT_CANARY_DIED) {
-        printf("In stack value of left canary: %X != %X\n", stk->left_canary, LEFT_CANARY_DIED);
+        fprintf(log_file_ptr, "In stack value of left canary: %X != %X\n", stk->left_canary, LEFT_CANARY_DIED);
     }
     if (error & RIGHT_CANARY_DIED) {
-        printf("In stack value of right canary: %X != %X\n", stk->right_canary, RIGHT_CANARY_DIED);
+        fprintf(log_file_ptr, "In stack value of right canary: %X != %X\n", stk->right_canary, RIGHT_CANARY_DIED);
     }
     if (error & WRONG_INTRO_ERR) {
-        printf("In stack->data value of left canary: %X != %X\n", GetStkDataIntro(stk),
-                                                                  INTRO_CANARY_VALUE);
+        fprintf(log_file_ptr, "In stack->data value of left canary: %X != %X\n", GetStkDataIntro(stk),
+                                                                                 INTRO_CANARY_VALUE);
     }
     if (error & WRONG_OUTRO_ERR) {
-        printf("In stack->data value of right canary: %X != %X\n", GetStkDataOutro(stk),
-                                                                  OUTRO_CANARY_VALUE);
+        fprintf(log_file_ptr, "In stack->data value of right canary: %X != %X\n", GetStkDataOutro(stk),
+                                                                                  OUTRO_CANARY_VALUE);
     }
+    if (error & WRONG_HASH)
+        fprintf(log_file_ptr, "Error with count of hash:\n\tstk->hash = %d\n\thash = %d\n", stk->hash,
+                                                                                            CalculateStkHash(stk));
+    CloseLogFile(log_file_ptr);
+}
+
+hash_t CalculateStkHash(Stack* stk)
+{
+    assert(stk);
+
+    Stack* temp_stk = stk;
+
+    hash_t hash = *(unsigned int*)temp_stk;
+
+    for (size_t i = 0; i < stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t); i++)
+    {
+        hash = hash << 5 + hash + stk->data[i];
+    }
+    return hash;
 }

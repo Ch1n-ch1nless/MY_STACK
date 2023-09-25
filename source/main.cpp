@@ -10,6 +10,7 @@ int main()
                  .name = nullptr,
                  .file = nullptr,
                  .line = -1,
+                 .hash = 0,
                  .right_canary = POISON_CANARY_VALUE};
 
     error_t error = NO_ERR;
@@ -26,7 +27,7 @@ int main()
         printf("----------------------------------------\n");
     }
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         elem_t old_value = .0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");

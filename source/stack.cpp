@@ -26,6 +26,8 @@ error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int 
         SetStkDataElemT(stk, i, POISON_VALUE);
     }
 
+    stk->hash = CalculateStkHash(stk);
+
     error |= StackVerify(stk);
     if (error != NO_ERR)
         PRINT_ERROR(stk, error)
@@ -51,6 +53,7 @@ error_t StackDtor(Stack* stk)
     stk->name = nullptr;
     stk->file = nullptr;
     stk->line = -1;
+    stk->hash = 0;
 
     return NO_ERR;
 }

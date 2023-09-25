@@ -1,0 +1,4 @@
+-----errors.log created in 13:02:49-----
+In source/main.cpp(18) called from source/stack.cpp(95) in function: StackPop
+Size in Stack = 0
+-----File was closed-----

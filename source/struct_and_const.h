@@ -9,6 +9,7 @@ typedef double elem_t;
 
 typedef unsigned long long error_t;
 typedef unsigned int canary_t;
+typedef unsigned int hash_t;
 
 #include <assert.h>
 #include <math.h>
@@ -31,6 +32,7 @@ struct Stack
     const char* name;
     const char* file;
     int line;
+    hash_t hash;
     canary_t right_canary;
 };
 
