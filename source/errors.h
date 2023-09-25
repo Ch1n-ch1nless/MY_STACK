@@ -35,6 +35,6 @@ error_t StackVerify(Stack* stk);
                                               const int line);
    void PrintStkDataElemT(const Stack* stk, const size_t index);
 
-hash_t  CalculateStkHash(Stack* stk);
+hash_t  CalculateStkHash(const Stack* stk);
 
 #endif // ERRORS_H_INCLUDED

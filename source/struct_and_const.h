@@ -25,15 +25,21 @@ const canary_t POISON_CANARY_VALUE = 0xF331D3AD;
 
 struct Stack
 {
+    #ifdef WITH_CANARY
     canary_t left_canary;
+    #endif
     char* data;
     int size;
     int capacity;
     const char* name;
     const char* file;
     int line;
+    #ifdef WITH_HASH
     hash_t hash;
+    #endif
+    #ifdef WITH_CANARY
     canary_t right_canary;
+    #endif
 };
 
 #endif // STRUCT_AND_CONST_H_INCLUDED

@@ -22,6 +22,7 @@ error_t StackVerify(Stack* stk)
         error |= NULL_FILE_ERR;
     if (stk->line <= 0)
         error |= MINUS_LINE_ERR;
+    #ifdef WITH_CANARY
     if (stk->left_canary != LEFT_CANARY_VALUE)
         error |= LEFT_CANARY_DIED;
     if (stk->right_canary != RIGHT_CANARY_VALUE)
@@ -30,8 +31,11 @@ error_t StackVerify(Stack* stk)
         error |= WRONG_INTRO_ERR;
     if (GetStkDataOutro(stk) != OUTRO_CANARY_VALUE)
         error |= WRONG_OUTRO_ERR;
+    #endif
+    #ifdef WITH_HASH
     if (stk->hash != CalculateStkHash(stk))
         error |= WRONG_HASH;
+    #endif
 
     return error;
 }
@@ -89,6 +93,7 @@ void PrintError(Stack* stk, error_t error, const char* file, const char* functio
     if (error & MINUS_LINE_ERR) {
         fprintf(stderr, "The line in file, which was made stack is %d\n", stk->line);
     }
+    #ifdef WITH_CANARY
     if (error & LEFT_CANARY_DIED) {
         fprintf(stderr, "In stack value of left canary: %X != %X\n", stk->left_canary, LEFT_CANARY_VALUE);
     }
@@ -103,10 +108,13 @@ void PrintError(Stack* stk, error_t error, const char* file, const char* functio
         fprintf(stderr, "In stack->data value of right canary: %X != %X\n", GetStkDataOutro(stk),
                                                                                   OUTRO_CANARY_VALUE);
     }
+    #endif
+    #ifdef WITH_HASH
     if (error & WRONG_HASH)
         fprintf(stderr, "Error with count of hash:\n\tstk->hash = %u\n\thash =      %u\n",
                                                                                     stk->hash,
                                                                                     CalculateStkHash(stk));
+    #endif
     //CloseLogFile(log_file_ptr);
 }
 
@@ -114,7 +122,7 @@ hash_t CalculateStkHash(const Stack* stk)
 {
     hash_t hash = 5381;
 
-    Stack* copy_stk = stk;
+    const Stack* copy_stk = stk;
 
     hash = hash * 33 + *(hash_t*)&copy_stk;
 
@@ -125,8 +133,10 @@ hash_t CalculateStkHash(const Stack* stk)
         hash = hash * 33 + stk->data[i];
     }
 
+    #ifdef WITH_CANARY
     hash = hash * 33 + stk->left_canary;
     hash = hash * 33 + stk->right_canary;
+    #endif
     hash = hash * 33 + stk->size;
     hash = hash * 33 + stk->capacity;
     hash = hash * 33 + stk->line;

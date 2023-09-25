@@ -4,15 +4,7 @@
 #ifndef TEST_MODE
 int main()
 {
-    Stack stk = {.left_canary = POISON_CANARY_VALUE,
-                 .data = nullptr,
-                 .size = -1,
-                 .capacity = -1,
-                 .name = nullptr,
-                 .file = nullptr,
-                 .line = -1,
-                 .hash = 0,
-                 .right_canary = POISON_CANARY_VALUE};
+    Stack stk = {};
 
     error_t error = NO_ERR;
 
