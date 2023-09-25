@@ -76,6 +76,7 @@ error_t StackPush(Stack* stk, elem_t new_value)
     }
     SetStkDataElemT(stk, stk->size, new_value);
     stk->size++;
+    stk->hash = CalculateStkHash(stk);
 
     return NO_ERR;
 }
@@ -99,6 +100,7 @@ error_t StackPop(Stack* stk, elem_t* ret_value)
     *ret_value = GetStkDataElemT(stk, stk->size-1);
     stk->size--;
     SetStkDataElemT(stk, stk->size, POISON_VALUE);
+    stk->hash = CalculateStkHash(stk);
     if (stk->size <= (stk->capacity / 4)) {
         error |= StackRealloc(stk);
         if (error) {
@@ -106,6 +108,7 @@ error_t StackPop(Stack* stk, elem_t* ret_value)
             return error;
         }
     }
+    stk->hash = CalculateStkHash(stk);
 
     return NO_ERR;
 }
@@ -120,13 +123,13 @@ error_t StackRealloc(Stack* stk)
 
     if (stk->size >= stk->capacity) {
         stk->capacity *= 2;
-    } else if (stk->size <= (stk->capacity / 4))  {
+    } else if (stk->size < (stk->capacity / 4))  {   //consts
         stk->capacity /= 2;
     } else {
         return NO_ERR;
     }
 
-    stk->data = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t));
+    stk->data = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t) + 8);
     if (stk->data == nullptr) {
         error |= MEM_ALLOC_ERR;
         PRINT_ERROR(stk, error)
@@ -147,7 +150,7 @@ error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
     error_t error = StackVerify(stk);
     if (error != NO_ERR) {
         PRINT_ERROR(stk, error);
-        return error;
+        //return error;
     }
 
     printf("Stack \"%s\": [%p] from %s(%d)\n", stk->name, stk, stk->file, stk->line);
@@ -156,6 +159,7 @@ error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
     printf("\tRight Canary = %X\n", stk->right_canary);
     printf("\tSize     = %d\n", stk->size);
     printf("\tCapacity = %d\n", stk->capacity);
+    printf("\tHash     = %u\n", stk->hash);
     printf("\tData     = [%p]\n", stk->data);
     printf("\tElements of Data:\n\t{\n");
     printf("\t Left canary(Intro) = %X\n", GetStkDataIntro(stk));

@@ -1,6 +1,7 @@
 #include "stack.h"
-#include "struct_and_const.h"
+#include "test.h"
 
+#ifndef TEST_MODE
 int main()
 {
     Stack stk = {.left_canary = POISON_CANARY_VALUE,
@@ -19,7 +20,7 @@ int main()
     PRINT_STACK(&stk)
 
     for (int i = 0; i < 8; i++) {
-        elem_t c = i + .5;
+        elem_t c = i + '0';
         error = StackPush(&stk, c);
         printf("----------------------------------------\n");
         printf("\tPush the Element [\033[32m" elem_format "\033[0m]\n", c);
@@ -28,7 +29,7 @@ int main()
     }
 
     for (int i = 0; i < 9; i++) {
-        elem_t old_value = .0;
+        elem_t old_value = 0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
         printf("\tPop the Element [\033[31m" elem_format "\033[0m]\n", old_value);
@@ -37,6 +38,15 @@ int main()
     }
 
     StackDtor(&stk);
+    PRINT_STACK(&stk);
 
     return 0;
 }
+#endif
+#ifdef TEST_MODE
+int main()
+{
+    LaunchTests();
+    return 0;
+}
+#endif

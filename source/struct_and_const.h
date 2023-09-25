@@ -1,8 +1,8 @@
 #ifndef STRUCT_AND_CONST_H_INCLUDED
 #define STRUCT_AND_CONST_H_INCLUDED
 
-typedef double elem_t;
-#define elem_format "%f"
+typedef char elem_t;
+#define elem_format "%c"
 
 #define PRINT_STACK(stk) PrintStack((stk), #stk, __FILE__, __FUNCTION__, __LINE__);
 #define STACK_CTOR(stk) StackCtor((stk), #stk, __FILE__, __LINE__);
@@ -16,7 +16,7 @@ typedef unsigned int hash_t;
 #include <stdio.h>
 #include <stdlib.h>
 
-const elem_t POISON_VALUE = NAN;
+const elem_t POISON_VALUE = '\0';
 const canary_t LEFT_CANARY_VALUE   = 0x602DA617;
 const canary_t RIGHT_CANARY_VALUE  = 0x602DABAD;
 const canary_t INTRO_CANARY_VALUE  = 0xD134CA75;
