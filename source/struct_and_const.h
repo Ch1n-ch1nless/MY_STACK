@@ -15,6 +15,7 @@ typedef unsigned int hash_t;
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 const elem_t POISON_VALUE = '\0';
 const canary_t LEFT_CANARY_VALUE   = 0x602DA617;
@@ -22,6 +23,8 @@ const canary_t RIGHT_CANARY_VALUE  = 0x602DABAD;
 const canary_t INTRO_CANARY_VALUE  = 0xD134CA75;
 const canary_t OUTRO_CANARY_VALUE  = 0x06B16A55;
 const canary_t POISON_CANARY_VALUE = 0xF331D3AD;
+static const char* KILLED_STACK = "D3AD 57ACK";
+static const char* LIVE_STACK   = "LIVE STACK";
 
 struct Stack
 {
@@ -34,6 +37,7 @@ struct Stack
     const char* name;
     const char* file;
     int line;
+    const char* status;
     #ifdef WITH_HASH
     hash_t hash;
     #endif

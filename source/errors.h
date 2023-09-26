@@ -24,6 +24,8 @@ enum ERRORS : unsigned int
     WRONG_INTRO_ERR         = 1 << 12,
     WRONG_OUTRO_ERR         = 1 << 13,
     WRONG_HASH              = 1 << 14,
+    STK_KILL_ERR            = 1 << 15,
+    WRONG_STK_STATUS_ERR    = 1 << 16,
 
     END_OF_ENUM
 };
@@ -32,7 +34,7 @@ error_t StackVerify(Stack* stk);
 
    void PrintError(Stack* stk, error_t error, const char* file,
                                               const char* function,
-                                              const int line);
+                                              const int   line);
    void PrintStkDataElemT(const Stack* stk, const size_t index);
 
 hash_t  CalculateStkHash(const Stack* stk);

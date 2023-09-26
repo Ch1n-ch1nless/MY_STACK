@@ -1,7 +1,5 @@
 #include "stack.h"
-#include "test.h"
 
-#ifndef TEST_MODE
 int main()
 {
     Stack stk = {};
@@ -20,7 +18,7 @@ int main()
         printf("----------------------------------------\n");
     }
 
-    for (int i = 0; i < 9; i++) {
+    for (int i = 0; i < 8; i++) {
         elem_t old_value = 0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
@@ -30,15 +28,6 @@ int main()
     }
 
     StackDtor(&stk);
-    PRINT_STACK(&stk);
 
     return 0;
 }
-#endif
-#ifdef TEST_MODE
-int main()
-{
-    LaunchTests();
-    return 0;
-}
-#endif

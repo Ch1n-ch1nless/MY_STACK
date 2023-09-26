@@ -1,5 +1,4 @@
 #include "stack.h"
-#include "getter_setter.h"
 
 error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int   line)
 {
@@ -22,6 +21,7 @@ error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int 
     stk->name = stk_name;
     stk->file = file;
     stk->line = line;
+    stk->status = LIVE_STACK;
 
     if (stk->data == nullptr) {
         error |= MEM_ALLOC_ERR;
@@ -58,14 +58,11 @@ error_t StackDtor(Stack* stk)
     stk->right_canary = POISON_CANARY_VALUE;
     #endif
 
-    free(stk->data);
+    if (stk->data != nullptr)
+        free(stk->data);
     stk->data = nullptr;
 
-    stk->size = -1;
-    stk->capacity = -1;
-    stk->name = nullptr;
-    stk->file = nullptr;
-    stk->line = -1;
+    stk->status = KILLED_STACK;
     #ifdef WITH_HASH
     stk->hash = 0;
     #endif
@@ -176,13 +173,11 @@ error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
                                const char* function, const int   line)
 {
     error_t error = StackVerify(stk);
-    if (error != NO_ERR) {
-        PRINT_ERROR(stk, error);
-        //return error;
-    }
+    PRINT_ERROR(stk, error)
 
     printf("Stack \"%s\": [%p] from %s(%d)\n", stk->name, stk, stk->file, stk->line);
     printf("called from file: %s(%d) in function: %s\n{\n", file, line, function);
+    printf("Status of Stack: %s\n", stk->status);
     #ifdef WITH_CANARY
     printf("\tLeft Canary =  %X\n", stk->left_canary);
     printf("\tRight Canary = %X\n", stk->right_canary);
@@ -193,6 +188,10 @@ error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
     printf("\tHash     = %u\n", stk->hash);
     #endif
     printf("\tData     = [%p]\n", stk->data);
+    if (stk->data == nullptr) {
+        printf("\tElements of Data: {}\n}\n");
+        return NO_ERR;
+    }
     printf("\tElements of Data:\n\t{\n");
     #ifdef WITH_CANARY
     printf("\t Left canary(Intro) = %X\n", GetStkDataIntro(stk));
