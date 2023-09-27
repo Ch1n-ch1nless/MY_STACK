@@ -2,7 +2,7 @@
 
 error_t StackVerify(Stack* stk)
 {
-    error_t error = NO_ERR;
+    error_t error = 0;
     if (stk == nullptr) {
         error |= NULL_STK_ERR;
         return error;

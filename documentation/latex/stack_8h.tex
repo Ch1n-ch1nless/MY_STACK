@@ -1,0 +1,160 @@
+\hypertarget{stack_8h}{}\doxysection{source/stack.h File Reference}
+\label{stack_8h}\index{source/stack.h@{source/stack.h}}
+{\ttfamily \#include \char`\"{}errors.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_ad04242c0d0b429650ded13251616ae9f}{Stack\+Ctor}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const char $\ast$stk\+\_\+name, const char $\ast$file, const int line)
+\begin{DoxyCompactList}\small\item\em Construct the \mbox{\hyperlink{struct_stack}{Stack}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_abbc8a543f8f24f10debdaf8d90931917}{Stack\+Dtor}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Destruct the \mbox{\hyperlink{struct_stack}{Stack}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_ad9540fdc0b5eb05d98ac2830cf12cea0}{Stack\+Push}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Add to \mbox{\hyperlink{struct_stack}{Stack}} the new element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_a350f67613674aad0a30fbccd159ee429}{Stack\+Pop}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} $\ast$ret\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Delete last element of \mbox{\hyperlink{struct_stack}{Stack}}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_afa39a975814902d9f97a79eac1030ce8}{Stack\+Realloc}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Make the new memory area of array with canaries. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{stack_8h_a3114ffcc6d84811dedfe0123ae24deed}{Print\+Stack}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const char $\ast$stk\+\_\+name, const char $\ast$file, const char $\ast$function, const int line)
+\begin{DoxyCompactList}\small\item\em Print all elements of stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{stack_8h_a3114ffcc6d84811dedfe0123ae24deed}\label{stack_8h_a3114ffcc6d84811dedfe0123ae24deed}} 
+\index{stack.h@{stack.h}!PrintStack@{PrintStack}}
+\index{PrintStack@{PrintStack}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{PrintStack()}{PrintStack()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Print\+Stack (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const char $\ast$}]{stk\+\_\+name,  }\item[{const char $\ast$}]{file,  }\item[{const char $\ast$}]{function,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+
+
+Print all elements of stack. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+name} & -\/ name of stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em file} & -\/ name of file in which the function was called \\
+\hline
+\mbox{\texttt{ in}}  & {\em function} & -\/ name of function that was called \\
+\hline
+\mbox{\texttt{ in}}  & {\em line} & -\/ value of line on which the function was called\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been destroyed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_ad04242c0d0b429650ded13251616ae9f}\label{stack_8h_ad04242c0d0b429650ded13251616ae9f}} 
+\index{stack.h@{stack.h}!StackCtor@{StackCtor}}
+\index{StackCtor@{StackCtor}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackCtor()}{StackCtor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Ctor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const char $\ast$}]{stk\+\_\+name,  }\item[{const char $\ast$}]{file,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+
+
+Construct the \mbox{\hyperlink{struct_stack}{Stack}}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em stk\+\_\+name} & -\/ name of stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em file} & -\/ name of file in which the stack was created \\
+\hline
+\mbox{\texttt{ in}}  & {\em line} & -\/ value of line on which the stack was created\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been compiled successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS.
+\end{DoxyReturn}
+The function assigns values to all stack elements and specifies the memory area of the array \mbox{\Hypertarget{stack_8h_abbc8a543f8f24f10debdaf8d90931917}\label{stack_8h_abbc8a543f8f24f10debdaf8d90931917}} 
+\index{stack.h@{stack.h}!StackDtor@{StackDtor}}
+\index{StackDtor@{StackDtor}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackDtor()}{StackDtor()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Dtor (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Destruct the \mbox{\hyperlink{struct_stack}{Stack}}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been destroyed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS.
+\end{DoxyReturn}
+The function makes free the memory area of array with canaries and make the status of stack -\/ KILLED\+\_\+\+STACK \mbox{\Hypertarget{stack_8h_a350f67613674aad0a30fbccd159ee429}\label{stack_8h_a350f67613674aad0a30fbccd159ee429}} 
+\index{stack.h@{stack.h}!StackPop@{StackPop}}
+\index{StackPop@{StackPop}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackPop()}{StackPop()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{\mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} $\ast$}]{ret\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Delete last element of \mbox{\hyperlink{struct_stack}{Stack}}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em ret\+\_\+value} & -\/ pointer to variable, which will contains the value of last element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been completed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_ad9540fdc0b5eb05d98ac2830cf12cea0}\label{stack_8h_ad9540fdc0b5eb05d98ac2830cf12cea0}} 
+\index{stack.h@{stack.h}!StackPush@{StackPush}}
+\index{StackPush@{StackPush}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackPush()}{StackPush()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Push (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{\mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}}}]{new\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Add to \mbox{\hyperlink{struct_stack}{Stack}} the new element. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+value} & -\/ value of new element\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been completed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{stack_8h_afa39a975814902d9f97a79eac1030ce8}\label{stack_8h_afa39a975814902d9f97a79eac1030ce8}} 
+\index{stack.h@{stack.h}!StackRealloc@{StackRealloc}}
+\index{StackRealloc@{StackRealloc}!stack.h@{stack.h}}
+\doxysubsubsection{\texorpdfstring{StackRealloc()}{StackRealloc()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Realloc (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Make the new memory area of array with canaries. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been destroyed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS.
+\end{DoxyReturn}
+If stk-\/$>$capacity is too small to add the new element pr too big to delete last element. The function finds new memory area, which size will be bigger or smaller. 

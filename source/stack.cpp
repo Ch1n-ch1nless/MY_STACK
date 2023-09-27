@@ -60,7 +60,6 @@ error_t StackDtor(Stack* stk)
 
     if (stk->data != nullptr)
         free(stk->data);
-    stk->data = nullptr;
 
     stk->status = KILLED_STACK;
     #ifdef WITH_HASH
@@ -172,8 +171,8 @@ error_t StackRealloc(Stack* stk)
 error_t PrintStack(Stack* stk, const char* stk_name, const char* file,
                                const char* function, const int   line)
 {
-    error_t error = StackVerify(stk);
-    PRINT_ERROR(stk, error)
+    /*error_t error = StackVerify(stk);
+    PRINT_ERROR(stk, error)*/
 
     printf("Stack \"%s\": [%p] from %s(%d)\n", stk->name, stk, stk->file, stk->line);
     printf("called from file: %s(%d) in function: %s\n{\n", file, line, function);

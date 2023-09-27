@@ -18,7 +18,7 @@ int main()
         printf("----------------------------------------\n");
     }
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 9; i++) {
         elem_t old_value = 0;
         error = StackPop(&stk, &old_value);
         printf("----------------------------------------\n");
@@ -28,6 +28,8 @@ int main()
     }
 
     StackDtor(&stk);
+    PRINT_STACK(&stk);
+    printf("Error is %ld\n", StackVerify(&stk));
 
     return 0;
 }

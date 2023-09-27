@@ -1,0 +1,218 @@
+\hypertarget{errors_8h}{}\doxysection{source/errors.h File Reference}
+\label{errors_8h}\index{source/errors.h@{source/errors.h}}
+{\ttfamily \#include \char`\"{}getter\+\_\+setter.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{errors_8h_a0874d0f884fa2073c9a431168570c3f7}\label{errors_8h_a0874d0f884fa2073c9a431168570c3f7}} 
+\#define {\bfseries PRINT\+\_\+\+ERROR}(stk,  error)~\mbox{\hyperlink{errors_8h_a2622afafc45b39d7bcd94ee7cd4049b6}{Print\+Error}}(stk, error, \+\_\+\+\_\+\+FILE\+\_\+\+\_\+, \+\_\+\+\_\+\+FUNCTION\+\_\+\+\_\+, \+\_\+\+\_\+\+LINE\+\_\+\+\_\+);
+\end{DoxyCompactItemize}
+\doxysubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aa}{ERRORS}} \+: unsigned int \{ \newline
+\mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa996b5f0bbad38a985dd3b62337879919}{NO\+\_\+\+ERR}} = 0
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa1f2ce2028a5db9837ca0b1d44b123bd9}{NULL\+\_\+\+STK\+\_\+\+ERR}} = 1 $<$$<$ 0
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa4d6aff60149c110a187af2c344606c84}{NULL\+\_\+\+ARR\+\_\+\+ERR}} = 1 $<$$<$ 1
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa866764b24e9c2f030eb6e9526a16c1e6}{MINUS\+\_\+\+CAPACITY\+\_\+\+ERR}} = 1 $<$$<$ 2
+, \newline
+\mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa3b45163464814d3dae36687d92a3472f}{MINUS\+\_\+\+SIZE\+\_\+\+ERR}} = 1 $<$$<$ 3
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaab8f4474ae6fff21abdc943e941da1938}{CAPACITY\+\_\+\+FEWER\+\_\+\+SIZE\+\_\+\+ERR}} = 1 $<$$<$ 4
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaaecbba28d1dc51a637d3f00d3b7c9b73c}{OPEN\+\_\+\+FILE\+\_\+\+ERR}} = 1 $<$$<$ 5
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa8880dd7d60dbee26b7f10458e681f640}{MEM\+\_\+\+ALLOC\+\_\+\+ERR}} = 1 $<$$<$ 6
+, \newline
+\mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa5813758c50f60276b07353840d3d10d0}{NULL\+\_\+\+NAME\+\_\+\+ERR}} = 1 $<$$<$ 7
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa3a07852ace265d6f11621d8bd9ba3b4c}{NULL\+\_\+\+FILE\+\_\+\+ERR}} = 1 $<$$<$ 8
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaae0d038e687e646fd7b6782f91083b1f2}{MINUS\+\_\+\+LINE\+\_\+\+ERR}} = 1 $<$$<$ 9
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa3cc043cf67cb52babf06cdf7bf97c313}{RIGHT\+\_\+\+CANARY\+\_\+\+DIED}} = 1 $<$$<$ 10
+, \newline
+\mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaaadaa59442d3949923a503b5d4c6cb922}{LEFT\+\_\+\+CANARY\+\_\+\+DIED}} = 1 $<$$<$ 11
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa17af9677b97a13a959f7ff649afcecef}{WRONG\+\_\+\+INTRO\+\_\+\+ERR}} = 1 $<$$<$ 12
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaa000f79245fef9aa1380d4dce31f797a6}{WRONG\+\_\+\+OUTRO\+\_\+\+ERR}} = 1 $<$$<$ 13
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaaf82caa47427767f6099c52129b9ce508}{WRONG\+\_\+\+HASH}} = 1 $<$$<$ 14
+, \newline
+\mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaad3b6615622f94a3136ca438fa1f3fe71}{STK\+\_\+\+KILL\+\_\+\+ERR}} = 1 $<$$<$ 15
+, \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aaaae738b9e04fd9551703cb8683ce0b723}{WRONG\+\_\+\+STK\+\_\+\+STATUS\+\_\+\+ERR}} = 1 $<$$<$ 16
+, {\bfseries END\+\_\+\+OF\+\_\+\+ENUM}
+ \}
+\begin{DoxyCompactList}\small\item\em Types of errors\+: \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} \mbox{\hyperlink{errors_8h_a998af72598c59a640c5b4ca208d17968}{Stack\+Verify}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Checks stack for errors listed in enum. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{errors_8h_a2622afafc45b39d7bcd94ee7cd4049b6}{Print\+Error}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} error, const char $\ast$file, const char $\ast$function, const int line)
+\begin{DoxyCompactList}\small\item\em Print all elements of \mbox{\hyperlink{struct_stack}{Stack}}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{errors_8h_a28f64304bae623e861ebbfca2a79b244}{Print\+Stk\+Data\+ElemT}} (const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Print the value and index of array\mbox{[}index\mbox{]}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_afb05a131363b0de134535fc5f7b01dc0}{hash\+\_\+t}} \mbox{\hyperlink{errors_8h_a73589b1d4ec95045f1a6ac9598c15877}{Calculate\+Stk\+Hash}} (const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Calculate the hash of stack by the djb2. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aa}\label{errors_8h_a0ec7482c550219fcc056392c996079aa}} 
+\index{errors.h@{errors.h}!ERRORS@{ERRORS}}
+\index{ERRORS@{ERRORS}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{ERRORS}{ERRORS}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{errors_8h_a0ec7482c550219fcc056392c996079aa}{ERRORS}} \+: unsigned int}
+
+
+
+Types of errors\+: 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_ERR@{NO\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!NO\_ERR@{NO\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa996b5f0bbad38a985dd3b62337879919}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa996b5f0bbad38a985dd3b62337879919}} 
+NO\+\_\+\+ERR&constant which shows that no errors \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NULL\_STK\_ERR@{NULL\_STK\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!NULL\_STK\_ERR@{NULL\_STK\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa1f2ce2028a5db9837ca0b1d44b123bd9}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa1f2ce2028a5db9837ca0b1d44b123bd9}} 
+NULL\+\_\+\+STK\+\_\+\+ERR&constant which shows that pointer to stack is null \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NULL\_ARR\_ERR@{NULL\_ARR\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!NULL\_ARR\_ERR@{NULL\_ARR\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa4d6aff60149c110a187af2c344606c84}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa4d6aff60149c110a187af2c344606c84}} 
+NULL\+\_\+\+ARR\+\_\+\+ERR&constant which shows that pointer to array is null \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MINUS\_CAPACITY\_ERR@{MINUS\_CAPACITY\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!MINUS\_CAPACITY\_ERR@{MINUS\_CAPACITY\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa866764b24e9c2f030eb6e9526a16c1e6}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa866764b24e9c2f030eb6e9526a16c1e6}} 
+MINUS\+\_\+\+CAPACITY\+\_\+\+ERR&constant which shows that capacity of array is fewer 0 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MINUS\_SIZE\_ERR@{MINUS\_SIZE\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!MINUS\_SIZE\_ERR@{MINUS\_SIZE\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa3b45163464814d3dae36687d92a3472f}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa3b45163464814d3dae36687d92a3472f}} 
+MINUS\+\_\+\+SIZE\+\_\+\+ERR&constant which shows that size of array is fewer 0 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CAPACITY\_FEWER\_SIZE\_ERR@{CAPACITY\_FEWER\_SIZE\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!CAPACITY\_FEWER\_SIZE\_ERR@{CAPACITY\_FEWER\_SIZE\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaab8f4474ae6fff21abdc943e941da1938}\label{errors_8h_a0ec7482c550219fcc056392c996079aaab8f4474ae6fff21abdc943e941da1938}} 
+CAPACITY\+\_\+\+FEWER\+\_\+\+SIZE\+\_\+\+ERR&constant which shows that capacity of array is fewer size \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN\_FILE\_ERR@{OPEN\_FILE\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!OPEN\_FILE\_ERR@{OPEN\_FILE\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaaecbba28d1dc51a637d3f00d3b7c9b73c}\label{errors_8h_a0ec7482c550219fcc056392c996079aaaecbba28d1dc51a637d3f00d3b7c9b73c}} 
+OPEN\+\_\+\+FILE\+\_\+\+ERR&constant which shows that program can not open file \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MEM\_ALLOC\_ERR@{MEM\_ALLOC\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!MEM\_ALLOC\_ERR@{MEM\_ALLOC\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa8880dd7d60dbee26b7f10458e681f640}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa8880dd7d60dbee26b7f10458e681f640}} 
+MEM\+\_\+\+ALLOC\+\_\+\+ERR&constant which shows that program can not allocate memory \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NULL\_NAME\_ERR@{NULL\_NAME\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!NULL\_NAME\_ERR@{NULL\_NAME\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa5813758c50f60276b07353840d3d10d0}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa5813758c50f60276b07353840d3d10d0}} 
+NULL\+\_\+\+NAME\+\_\+\+ERR&constant which shows that pointer to name of stack is null \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NULL\_FILE\_ERR@{NULL\_FILE\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!NULL\_FILE\_ERR@{NULL\_FILE\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa3a07852ace265d6f11621d8bd9ba3b4c}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa3a07852ace265d6f11621d8bd9ba3b4c}} 
+NULL\+\_\+\+FILE\+\_\+\+ERR&constant which shows that pointer to file of stack is null \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MINUS\_LINE\_ERR@{MINUS\_LINE\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!MINUS\_LINE\_ERR@{MINUS\_LINE\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaae0d038e687e646fd7b6782f91083b1f2}\label{errors_8h_a0ec7482c550219fcc056392c996079aaae0d038e687e646fd7b6782f91083b1f2}} 
+MINUS\+\_\+\+LINE\+\_\+\+ERR&constant which shows that value of stack\textquotesingle{}s line is fewer 0 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RIGHT\_CANARY\_DIED@{RIGHT\_CANARY\_DIED}!errors.h@{errors.h}}\index{errors.h@{errors.h}!RIGHT\_CANARY\_DIED@{RIGHT\_CANARY\_DIED}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa3cc043cf67cb52babf06cdf7bf97c313}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa3cc043cf67cb52babf06cdf7bf97c313}} 
+RIGHT\+\_\+\+CANARY\+\_\+\+DIED&constant which shows that right canary of stack was changed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LEFT\_CANARY\_DIED@{LEFT\_CANARY\_DIED}!errors.h@{errors.h}}\index{errors.h@{errors.h}!LEFT\_CANARY\_DIED@{LEFT\_CANARY\_DIED}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaaadaa59442d3949923a503b5d4c6cb922}\label{errors_8h_a0ec7482c550219fcc056392c996079aaaadaa59442d3949923a503b5d4c6cb922}} 
+LEFT\+\_\+\+CANARY\+\_\+\+DIED&constant which shows that left canary of stack was changed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WRONG\_INTRO\_ERR@{WRONG\_INTRO\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!WRONG\_INTRO\_ERR@{WRONG\_INTRO\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa17af9677b97a13a959f7ff649afcecef}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa17af9677b97a13a959f7ff649afcecef}} 
+WRONG\+\_\+\+INTRO\+\_\+\+ERR&constant which shows that left canary of array was changed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WRONG\_OUTRO\_ERR@{WRONG\_OUTRO\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!WRONG\_OUTRO\_ERR@{WRONG\_OUTRO\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaa000f79245fef9aa1380d4dce31f797a6}\label{errors_8h_a0ec7482c550219fcc056392c996079aaa000f79245fef9aa1380d4dce31f797a6}} 
+WRONG\+\_\+\+OUTRO\+\_\+\+ERR&constant which shows that right canary of array was changed \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WRONG\_HASH@{WRONG\_HASH}!errors.h@{errors.h}}\index{errors.h@{errors.h}!WRONG\_HASH@{WRONG\_HASH}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaaf82caa47427767f6099c52129b9ce508}\label{errors_8h_a0ec7482c550219fcc056392c996079aaaf82caa47427767f6099c52129b9ce508}} 
+WRONG\+\_\+\+HASH&constant which shows that hash is wrong \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STK\_KILL\_ERR@{STK\_KILL\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!STK\_KILL\_ERR@{STK\_KILL\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaad3b6615622f94a3136ca438fa1f3fe71}\label{errors_8h_a0ec7482c550219fcc056392c996079aaad3b6615622f94a3136ca438fa1f3fe71}} 
+STK\+\_\+\+KILL\+\_\+\+ERR&constant which shows that status of stack is KILLED\+\_\+\+STACK \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WRONG\_STK\_STATUS\_ERR@{WRONG\_STK\_STATUS\_ERR}!errors.h@{errors.h}}\index{errors.h@{errors.h}!WRONG\_STK\_STATUS\_ERR@{WRONG\_STK\_STATUS\_ERR}}}\mbox{\Hypertarget{errors_8h_a0ec7482c550219fcc056392c996079aaaae738b9e04fd9551703cb8683ce0b723}\label{errors_8h_a0ec7482c550219fcc056392c996079aaaae738b9e04fd9551703cb8683ce0b723}} 
+WRONG\+\_\+\+STK\+\_\+\+STATUS\+\_\+\+ERR&constant which shows that status of stack was changed to strange value \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{errors_8h_a73589b1d4ec95045f1a6ac9598c15877}\label{errors_8h_a73589b1d4ec95045f1a6ac9598c15877}} 
+\index{errors.h@{errors.h}!CalculateStkHash@{CalculateStkHash}}
+\index{CalculateStkHash@{CalculateStkHash}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{CalculateStkHash()}{CalculateStkHash()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_afb05a131363b0de134535fc5f7b01dc0}{hash\+\_\+t}} Calculate\+Stk\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Calculate the hash of stack by the djb2. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to \mbox{\hyperlink{struct_stack}{Stack}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+new hash of stack 
+\end{DoxyReturn}
+\mbox{\Hypertarget{errors_8h_a2622afafc45b39d7bcd94ee7cd4049b6}\label{errors_8h_a2622afafc45b39d7bcd94ee7cd4049b6}} 
+\index{errors.h@{errors.h}!PrintError@{PrintError}}
+\index{PrintError@{PrintError}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{PrintError()}{PrintError()}}
+{\footnotesize\ttfamily void Print\+Error (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{\mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}}}]{error,  }\item[{const char $\ast$}]{file,  }\item[{const char $\ast$}]{function,  }\item[{const int}]{line }\end{DoxyParamCaption})}
+
+
+
+Print all elements of \mbox{\hyperlink{struct_stack}{Stack}}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to \mbox{\hyperlink{struct_stack}{Stack}} \\
+\hline
+\mbox{\texttt{ in}}  & {\em error} & -\/ variable which contains the errors of stack \\
+\hline
+\mbox{\texttt{ in}}  & {\em file} & -\/ pointer to file which was called function \\
+\hline
+\mbox{\texttt{ in}}  & {\em function} & -\/ pointer to string, which contains name of function \\
+\hline
+\mbox{\texttt{ in}}  & {\em line} & -\/ variable, which contains number of line that function was called \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{errors_8h_a28f64304bae623e861ebbfca2a79b244}\label{errors_8h_a28f64304bae623e861ebbfca2a79b244}} 
+\index{errors.h@{errors.h}!PrintStkDataElemT@{PrintStkDataElemT}}
+\index{PrintStkDataElemT@{PrintStkDataElemT}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{PrintStkDataElemT()}{PrintStkDataElemT()}}
+{\footnotesize\ttfamily void Print\+Stk\+Data\+ElemT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Print the value and index of array\mbox{[}index\mbox{]}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to \mbox{\hyperlink{struct_stack}{Stack}} \\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & -\/ index of element \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{errors_8h_a998af72598c59a640c5b4ca208d17968}\label{errors_8h_a998af72598c59a640c5b4ca208d17968}} 
+\index{errors.h@{errors.h}!StackVerify@{StackVerify}}
+\index{StackVerify@{StackVerify}!errors.h@{errors.h}}
+\doxysubsubsection{\texorpdfstring{StackVerify()}{StackVerify()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}} Stack\+Verify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Checks stack for errors listed in enum. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to \mbox{\hyperlink{struct_stack}{Stack}}\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+NO\+\_\+\+ERR -\/ if the stack has been destroyed successfully 
+
+error -\/ the variable which contains numbers of errors, which u can see in enum ERRRORS. 
+\end{DoxyReturn}

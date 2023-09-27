@@ -1,0 +1,130 @@
+\hypertarget{getter__setter_8h}{}\doxysection{source/getter\+\_\+setter.h File Reference}
+\label{getter__setter_8h}\index{source/getter\_setter.h@{source/getter\_setter.h}}
+{\ttfamily \#include \char`\"{}struct\+\_\+and\+\_\+const.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{getter__setter_8h_a3ee382518393265c586a259c693026de}{Get\+Stk\+Data\+Intro}} (const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Return the value of array\textquotesingle{}s left canary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{getter__setter_8h_a294bc2d90d8e7ee1f83a9e07d97df8f0}{Get\+Stk\+Data\+Outro}} (const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk)
+\begin{DoxyCompactList}\small\item\em Return the value of array\textquotesingle{}s right canary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{getter__setter_8h_a08de14047606b0ef9eb5dc831f030ce7}{Set\+Stk\+Data\+Intro}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Set the new value of array\textquotesingle{}s left canary. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{getter__setter_8h_ab950169101646a5e795fa3e28b735634}{Set\+Stk\+Data\+Outro}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Set the new value of array\textquotesingle{}s right canary. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} \mbox{\hyperlink{getter__setter_8h_a10bce91af016a826eed209177e1b781a}{Get\+Stk\+Data\+ElemT}} (const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Return the value of array\mbox{[}index\mbox{]}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{getter__setter_8h_a588531b5bead8e6dac131dfe9da4e7be}{Set\+Stk\+Data\+ElemT}} (\mbox{\hyperlink{struct_stack}{Stack}} $\ast$stk, const size\+\_\+t index, \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Set the new value in array\mbox{[}index\mbox{]}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{getter__setter_8h_a10bce91af016a826eed209177e1b781a}\label{getter__setter_8h_a10bce91af016a826eed209177e1b781a}} 
+\index{getter\_setter.h@{getter\_setter.h}!GetStkDataElemT@{GetStkDataElemT}}
+\index{GetStkDataElemT@{GetStkDataElemT}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{GetStkDataElemT()}{GetStkDataElemT()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} Get\+Stk\+Data\+ElemT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+
+
+Return the value of array\mbox{[}index\mbox{]}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & -\/ index of element in array\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value of array\mbox{[}index\mbox{]} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{getter__setter_8h_a3ee382518393265c586a259c693026de}\label{getter__setter_8h_a3ee382518393265c586a259c693026de}} 
+\index{getter\_setter.h@{getter\_setter.h}!GetStkDataIntro@{GetStkDataIntro}}
+\index{GetStkDataIntro@{GetStkDataIntro}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{GetStkDataIntro()}{GetStkDataIntro()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} Get\+Stk\+Data\+Intro (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Return the value of array\textquotesingle{}s left canary. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value of array\textquotesingle{}s left canary 
+\end{DoxyReturn}
+\mbox{\Hypertarget{getter__setter_8h_a294bc2d90d8e7ee1f83a9e07d97df8f0}\label{getter__setter_8h_a294bc2d90d8e7ee1f83a9e07d97df8f0}} 
+\index{getter\_setter.h@{getter\_setter.h}!GetStkDataOutro@{GetStkDataOutro}}
+\index{GetStkDataOutro@{GetStkDataOutro}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{GetStkDataOutro()}{GetStkDataOutro()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} Get\+Stk\+Data\+Outro (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk }\end{DoxyParamCaption})}
+
+
+
+Return the value of array\textquotesingle{}s right canary. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+value of array\textquotesingle{}s right canary 
+\end{DoxyReturn}
+\mbox{\Hypertarget{getter__setter_8h_a588531b5bead8e6dac131dfe9da4e7be}\label{getter__setter_8h_a588531b5bead8e6dac131dfe9da4e7be}} 
+\index{getter\_setter.h@{getter\_setter.h}!SetStkDataElemT@{SetStkDataElemT}}
+\index{SetStkDataElemT@{SetStkDataElemT}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{SetStkDataElemT()}{SetStkDataElemT()}}
+{\footnotesize\ttfamily void Set\+Stk\+Data\+ElemT (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const size\+\_\+t}]{index,  }\item[{\mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}}}]{new\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Set the new value in array\mbox{[}index\mbox{]}. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\mbox{\texttt{ in}}  & {\em index} & -\/ index of element in array\\
+\hline
+\mbox{\texttt{ in}}  & {\em new} & value of array\mbox{[}index\mbox{]} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{getter__setter_8h_a08de14047606b0ef9eb5dc831f030ce7}\label{getter__setter_8h_a08de14047606b0ef9eb5dc831f030ce7}} 
+\index{getter\_setter.h@{getter\_setter.h}!SetStkDataIntro@{SetStkDataIntro}}
+\index{SetStkDataIntro@{SetStkDataIntro}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{SetStkDataIntro()}{SetStkDataIntro()}}
+{\footnotesize\ttfamily void Set\+Stk\+Data\+Intro (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}}}]{new\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Set the new value of array\textquotesingle{}s left canary. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\mbox{\texttt{ in}}  & {\em new} & value of array\textquotesingle{}s left canary \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{getter__setter_8h_ab950169101646a5e795fa3e28b735634}\label{getter__setter_8h_ab950169101646a5e795fa3e28b735634}} 
+\index{getter\_setter.h@{getter\_setter.h}!SetStkDataOutro@{SetStkDataOutro}}
+\index{SetStkDataOutro@{SetStkDataOutro}!getter\_setter.h@{getter\_setter.h}}
+\doxysubsubsection{\texorpdfstring{SetStkDataOutro()}{SetStkDataOutro()}}
+{\footnotesize\ttfamily void Set\+Stk\+Data\+Outro (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_stack}{Stack}} $\ast$}]{stk,  }\item[{const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}}}]{new\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+Set the new value of array\textquotesingle{}s right canary. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em stk} & -\/ pointer to stack\\
+\hline
+\mbox{\texttt{ in}}  & {\em new} & value of array\textquotesingle{}s right canary \\
+\hline
+\end{DoxyParams}

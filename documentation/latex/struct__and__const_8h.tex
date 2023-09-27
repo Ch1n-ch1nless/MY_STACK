@@ -1,0 +1,77 @@
+\hypertarget{struct__and__const_8h}{}\doxysection{source/struct\+\_\+and\+\_\+const.h File Reference}
+\label{struct__and__const_8h}\index{source/struct\_and\_const.h@{source/struct\_and\_const.h}}
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_stack}{Stack}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{struct__and__const_8h_ad3db4d8300e18d87054e30896d2dc477}{elem\+\_\+format}}~\char`\"{}\%c\char`\"{}
+\item 
+\mbox{\Hypertarget{struct__and__const_8h_a08de7c41a25c8b1f2ff5c83d5458cabd}\label{struct__and__const_8h_a08de7c41a25c8b1f2ff5c83d5458cabd}} 
+\#define {\bfseries PRINT\+\_\+\+STACK}(stk)~\mbox{\hyperlink{stack_8h_a3114ffcc6d84811dedfe0123ae24deed}{Print\+Stack}}((stk), \#stk, \+\_\+\+\_\+\+FILE\+\_\+\+\_\+, \+\_\+\+\_\+\+FUNCTION\+\_\+\+\_\+, \+\_\+\+\_\+\+LINE\+\_\+\+\_\+);
+\item 
+\mbox{\Hypertarget{struct__and__const_8h_a7f7e7ea205476342cdac36c8881c81ba}\label{struct__and__const_8h_a7f7e7ea205476342cdac36c8881c81ba}} 
+\#define {\bfseries STACK\+\_\+\+CTOR}(stk)~\mbox{\hyperlink{stack_8h_ad04242c0d0b429650ded13251616ae9f}{Stack\+Ctor}}((stk), \#stk, \+\_\+\+\_\+\+FILE\+\_\+\+\_\+, \+\_\+\+\_\+\+LINE\+\_\+\+\_\+);
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef char \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}}
+\item 
+\mbox{\Hypertarget{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}\label{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}} 
+typedef unsigned long long \mbox{\hyperlink{struct__and__const_8h_a1658a59af627d7befc776f9b58465fee}{error\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The error\+\_\+t is data type of errors. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}\label{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}} 
+typedef unsigned int \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The canary\+\_\+t is data type of canaries. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_afb05a131363b0de134535fc5f7b01dc0}\label{struct__and__const_8h_afb05a131363b0de134535fc5f7b01dc0}} 
+typedef unsigned int \mbox{\hyperlink{struct__and__const_8h_afb05a131363b0de134535fc5f7b01dc0}{hash\+\_\+t}}
+\begin{DoxyCompactList}\small\item\em The hash\+\_\+t is data type of hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{struct__and__const_8h_a4c518c9eaa023ec32d1d1f2280111b3e}\label{struct__and__const_8h_a4c518c9eaa023ec32d1d1f2280111b3e}} 
+const \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_a4c518c9eaa023ec32d1d1f2280111b3e}{POISON\+\_\+\+VALUE}} = \textquotesingle{}\textbackslash{}0\textquotesingle{}
+\begin{DoxyCompactList}\small\item\em The value of element, which show that we don\textquotesingle{}t have this element. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_a0d77c2cb554e30b92806017fd677ec9a}\label{struct__and__const_8h_a0d77c2cb554e30b92806017fd677ec9a}} 
+const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_a0d77c2cb554e30b92806017fd677ec9a}{LEFT\+\_\+\+CANARY\+\_\+\+VALUE}} = 0x602\+DA617
+\begin{DoxyCompactList}\small\item\em The value of working stack left canary. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_a6862d6a86f522e428f108f3f626c7ead}\label{struct__and__const_8h_a6862d6a86f522e428f108f3f626c7ead}} 
+const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_a6862d6a86f522e428f108f3f626c7ead}{RIGHT\+\_\+\+CANARY\+\_\+\+VALUE}} = 0x602\+DABAD
+\begin{DoxyCompactList}\small\item\em The value of working stack right canary. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_aa12f8972041dc7a314b062798a0392d1}\label{struct__and__const_8h_aa12f8972041dc7a314b062798a0392d1}} 
+const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_aa12f8972041dc7a314b062798a0392d1}{INTRO\+\_\+\+CANARY\+\_\+\+VALUE}} = 0x\+D134\+CA75
+\begin{DoxyCompactList}\small\item\em The value of working data left canary. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_a299805813474d7a55f70d2a8b7c18ebf}\label{struct__and__const_8h_a299805813474d7a55f70d2a8b7c18ebf}} 
+const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_a299805813474d7a55f70d2a8b7c18ebf}{OUTRO\+\_\+\+CANARY\+\_\+\+VALUE}} = 0x06\+B16\+A55
+\begin{DoxyCompactList}\small\item\em The value of working data right canary. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{struct__and__const_8h_a6b642cfd20b9b9bf786f522a584ce590}\label{struct__and__const_8h_a6b642cfd20b9b9bf786f522a584ce590}} 
+const \mbox{\hyperlink{struct__and__const_8h_ac7abc23ca431d14aa8ab0e9617d6b6b1}{canary\+\_\+t}} \mbox{\hyperlink{struct__and__const_8h_a6b642cfd20b9b9bf786f522a584ce590}{POISON\+\_\+\+CANARY\+\_\+\+VALUE}} = 0x\+F331\+D3\+AD
+\begin{DoxyCompactList}\small\item\em The value of killed canary. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{struct__and__const_8h_ad3db4d8300e18d87054e30896d2dc477}\label{struct__and__const_8h_ad3db4d8300e18d87054e30896d2dc477}} 
+\index{struct\_and\_const.h@{struct\_and\_const.h}!elem\_format@{elem\_format}}
+\index{elem\_format@{elem\_format}!struct\_and\_const.h@{struct\_and\_const.h}}
+\doxysubsubsection{\texorpdfstring{elem\_format}{elem\_format}}
+{\footnotesize\ttfamily \#define elem\+\_\+format~\char`\"{}\%c\char`\"{}}
+
+This define specifies how the elements will be displayed 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}\label{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}} 
+\index{struct\_and\_const.h@{struct\_and\_const.h}!elem\_t@{elem\_t}}
+\index{elem\_t@{elem\_t}!struct\_and\_const.h@{struct\_and\_const.h}}
+\doxysubsubsection{\texorpdfstring{elem\_t}{elem\_t}}
+{\footnotesize\ttfamily typedef char \mbox{\hyperlink{struct__and__const_8h_ade95561d14e02292800c5495bedc337c}{elem\+\_\+t}}}
+
+The elem\+\_\+t is data type of stack\textquotesingle{}s elements 
