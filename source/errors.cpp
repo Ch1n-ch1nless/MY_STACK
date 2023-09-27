@@ -14,8 +14,6 @@ error_t StackVerify(Stack* stk)
     }
     if (stk->data == nullptr)
         error |= NULL_ARR_ERR;
-    if (stk->capacity <= 0)
-        error |= MINUS_CAPACITY_ERR;
     if (stk->size < 0)
         error |= MINUS_SIZE_ERR;
     if (stk->size > stk->capacity)
