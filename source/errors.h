@@ -3,6 +3,7 @@
 #define ERRORS_H_INCLUDED
 
 #include "getter_setter.h"
+#include "log.h"
 #include <string.h>
 
 #define PRINT_ERROR(stk, error) PrintError(stk, error, __FILE__, __FUNCTION__, __LINE__);

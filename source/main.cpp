@@ -29,7 +29,6 @@ int main()
 
     StackDtor(&stk);
     PRINT_STACK(&stk);
-    printf("Error is %ld\n", StackVerify(&stk));
 
     return 0;
 }

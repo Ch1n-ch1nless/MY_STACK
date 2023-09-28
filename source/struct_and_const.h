@@ -41,21 +41,21 @@ static const char* LIVE_STACK   = "LIVE STACK";     //!< @brief The status, whic
  */
 struct Stack
 {
-    #ifdef WITH_CANARY
-    canary_t left_canary;  //!< the element, that checks if the stack data was affected on the left
+    #if defined WITH_CANARY
+        canary_t left_canary;   //!< the element, that checks if the stack data was affected on the left
     #endif
-    char* data;            //!< the pointer to memory area where the array with canaries is located
-    int size;              //!< the number of elements
-    int capacity;          //!< the size of array
-    const char* name;      //!< the name of stack
-    const char* file;      //!< the name of file, which has been constructed stack
-    int line;              //!< the value of line, which has been constructed the stack
-    const char* status;    //!< the status of stack, which can contains LIVE_STACk or KILLED_STACK
-    #ifdef WITH_HASH
-    hash_t hash;           //!< the hash of stack
+    char* data;                 //!< the pointer to memory area where the array with canaries is located
+    int size;                   //!< the number of elements
+    int capacity;               //!< the size of array
+    const char* name;           //!< the name of stack
+    const char* file;           //!< the name of file, which has been constructed stack
+    int line;                   //!< the value of line, which has been constructed the stack
+    const char* status;         //!< the status of stack, which can contains LIVE_STACk or KILLED_STACK
+    #if defined WITH_HASH
+        hash_t hash;            //!< the hash of stack
     #endif
-    #ifdef WITH_CANARY
-    canary_t right_canary; //!< the element, that checks if the stack data was affected on the right
+    #if defined WITH_CANARY
+        canary_t right_canary;  //!< the element, that checks if the stack data was affected on the right
     #endif
 };
 

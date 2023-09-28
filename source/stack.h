@@ -19,6 +19,7 @@
  *The function assigns values to all stack elements and specifies the memory area of the array
  */
 error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int   line);
+
 /**
  *@brief Destruct the Stack
  *
@@ -31,6 +32,8 @@ error_t StackCtor(Stack* stk, const char* stk_name, const char* file, const int 
  */
 error_t StackDtor(Stack* stk);
 
+
+
 /**
  *@brief Add to Stack the new element
  *
@@ -41,6 +44,7 @@ error_t StackDtor(Stack* stk);
  *@return error  - the variable which contains numbers of errors, which u can see in enum ERRRORS.
  */
 error_t StackPush(Stack* stk, elem_t new_value);
+
 /**
  *@brief Delete last element of Stack
  *
@@ -64,6 +68,8 @@ error_t StackPop(Stack* stk, elem_t* ret_value);
  *finds new memory area, which size will be bigger or smaller.
  */
 error_t StackRealloc(Stack* stk);
+
+
 
 /**
  *@brief Print all elements of stack

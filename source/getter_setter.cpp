@@ -38,28 +38,28 @@ void SetStkDataOutro(Stack* stk, const canary_t outro_value)
 elem_t GetStkDataElemT(const Stack* stk, const size_t index)
 {
     assert(stk);
-    #ifdef WITH_CANARY
-    canary_t* temp_ptr1 = (canary_t*) stk->data;
-    temp_ptr1++;
-    elem_t* temp_ptr = (elem_t*) temp_ptr1;
-    return temp_ptr[index];
-    #endif
-    #ifndef WITH_CANARY
-    return *((elem_t*)(stk->data + index));
+
+    #if defined WITH_CANARY
+        canary_t* temp_ptr1 = (canary_t*) stk->data;
+        temp_ptr1++;
+        elem_t* temp_ptr = (elem_t*) temp_ptr1;
+        return temp_ptr[index];
+    #else /*WITHOUT CANARY*/
+        return *((elem_t*)(stk->data + index));
     #endif
 }
 
 void SetStkDataElemT(Stack* stk, const size_t index, elem_t new_value)
 {
     assert(stk);
-    #ifdef WITH_CANARY
-    canary_t* temp_ptr1 = (canary_t*) stk->data;
-    temp_ptr1++;
-    elem_t* temp_ptr = (elem_t*) temp_ptr1;
-    temp_ptr[index] = new_value;
+
+    #if defined WITH_CANARY
+        canary_t* temp_ptr1 = (canary_t*) stk->data;
+        temp_ptr1++;
+        elem_t* temp_ptr = (elem_t*) temp_ptr1;
+        temp_ptr[index] = new_value;
+    #else /*WITHOUT CANARY*/
+        *((elem_t*)(stk->data + index)) = new_value;
     #endif
-    #ifndef WITH_CANARY
-    *((elem_t*)(stk->data + index)) = new_value;
     return;
-    #endif
 }
