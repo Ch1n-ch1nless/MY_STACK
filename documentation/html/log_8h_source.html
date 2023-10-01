@@ -69,18 +69,24 @@ $(function() {
 <div class="title">log.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LOG_H_INCLUDED</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define LOG_H_INCLUDED</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="struct__and__const_8h.html">struct_and_const.h</a>&quot;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &quot;string.h&quot;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="keywordtype">void</span> CloseLogFile(FILE* log_file_ptr);</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;FILE* OpenLogFile(<span class="keyword">const</span> <span class="keywordtype">char</span>* file_name);</div>
+<a href="log_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef LOG_H_INCLUDED</span></div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#define LOG_H_INCLUDED</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;assert.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;math.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;stdio.h&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;stdlib.h&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
 <div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160; </div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LOG_H_INCLUDED</span></div>
-<div class="ttc" id="astruct__and__const_8h_html"><div class="ttname"><a href="struct__and__const_8h.html">struct_and_const.h</a></div></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">static</span> <span class="keyword">const</span> <span class="keywordtype">char</span>* EXTENSION = <span class="stringliteral">&quot;.log&quot;</span>;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;FILE* <a class="code" href="log_8h.html#ae27851a9befeef4b1eadffe1ebd1dfea">OpenFile</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* FILE_NAME, <span class="keyword">const</span> <span class="keywordtype">char</span>* mode);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keywordtype">void</span> <a class="code" href="log_8h.html#a9a44d91c11a84d51e1953a29204c02bd">CloseFile</a>(FILE* LOG_FILE_PTR);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor">#endif </span><span class="comment">// LOG_H_INCLUDED</span></div>
+<div class="ttc" id="alog_8h_html_a9a44d91c11a84d51e1953a29204c02bd"><div class="ttname"><a href="log_8h.html#a9a44d91c11a84d51e1953a29204c02bd">CloseFile</a></div><div class="ttdeci">void CloseFile(FILE *LOG_FILE_PTR)</div><div class="ttdoc">Close the file which was opened.</div><div class="ttdef"><b>Definition:</b> log.cpp:42</div></div>
+<div class="ttc" id="alog_8h_html_ae27851a9befeef4b1eadffe1ebd1dfea"><div class="ttname"><a href="log_8h.html#ae27851a9befeef4b1eadffe1ebd1dfea">OpenFile</a></div><div class="ttdeci">FILE * OpenFile(const char *FILE_NAME, const char *mode)</div><div class="ttdoc">Create and open file with extension = EXTENSION(constant in log.h)</div><div class="ttdef"><b>Definition:</b> log.cpp:3</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

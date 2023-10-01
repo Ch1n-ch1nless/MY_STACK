@@ -14,19 +14,20 @@
 static const char* EXTENSION = ".log";
 
 /**
- *@brief Open file with extension = EXTENSION(constant in log.h)
+ *@brief Create and open file with extension = EXTENSION(constant in log.h)
  *
- *@param [in] file - string, which contains name of file without extension
- *@param [in] mode - string, which contains the mode of reading the file
+ *@param [in] FILE_NAME - string, which contains name of file without extension
+ *@param [in] mode      - string, which contains the mode of reading the file
  *
- *@return log_file_ptr - pointer on file with extension = EXTENSION
+ *@return pointer to file
  */
-FILE* OpenFile(const char* file_name, const char* mode);
+FILE* OpenFile(const char* FILE_NAME, const char* mode);
+
 /**
- *@brief Close the file
+ *@brief Close the file which was opened
  *
- *@param [in] log_file_ptr - pointer on file, which will close
+ *@param [in] LOG_FILE_PTR - pointer to file
  */
-void CloseFile(FILE* log_file_ptr);
+void CloseFile(FILE* LOG_FILE_PTR);
 
 #endif // LOG_H_INCLUDED

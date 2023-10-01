@@ -74,8 +74,7 @@ error_t StackDtor(Stack* stk)
         stk->right_canary = POISON_CANARY_VALUE;
     #endif
 
-    if (stk->data != nullptr)
-        free(stk->data);
+    free(stk->data);
 
     stk->status = KILLED_STACK;
 
@@ -98,15 +97,12 @@ error_t StackPush(Stack* stk, elem_t new_value)
         return error;
     }
 
-    //Check the needless of realloc() the data
-    if (stk->size >= stk->capacity)
+    //Call StackRealloc()
+    error |= StackRealloc(stk);
+    if (error != NO_ERR)
     {
-        error |= StackRealloc(stk);
-        if (error != NO_ERR)
-        {
-            PRINT_ERROR(stk, error)
-            return error;
-        }
+        PRINT_ERROR(stk, error)
+        return error;
     }
 
     //Push the element to data
@@ -152,15 +148,12 @@ error_t StackPop(Stack* stk, elem_t* ret_value)
         stk->hash = CalculateStkHash((const Stack*) stk);
     #endif
 
-    //Check the needless of realloc() the data
-    if (stk->size <= (stk->capacity / 4))
+    //Call StackRealloc()
+    error |= StackRealloc(stk);
+    if (error)
     {
-        error |= StackRealloc(stk);
-        if (error)
-        {
-            PRINT_ERROR(stk, error);
-            return error;
-        }
+        PRINT_ERROR(stk, error);
+        return error;
     }
 
     //Calculate the hash
@@ -184,11 +177,11 @@ error_t StackRealloc(Stack* stk)
     //Set to stk->capacity the new value
     if (stk->size >= stk->capacity)
     {
-        stk->capacity *= 2;
+        stk->capacity *= STACK_SIZE_UP;
     }
-    else if (stk->size < (stk->capacity / 4))
+    else if (stk->size < (stk->capacity / STACK_SIZE_DOWN))
     {
-        stk->capacity /= 2;
+        stk->capacity /= STACK_SIZE_UP; //Reduce the data size by constant = STACK_SIZE_UP
     }
     else
     {

@@ -1,26 +1,46 @@
 #include "log.h"
 
-FILE* OpenFile(const char* file_name, const char* mode)
+FILE* OpenFile(const char* FILE_NAME, const char* mode)
 {
-    char* copy_file = strdup(file_name);
+    assert(FILE_NAME);
+    assert(mode);
 
-    strcat(copy_file, EXTENSION);
+    //Pointer the file where errors will be printed
+    FILE* LOG_FILE_PTR = stderr;
 
-    FILE* log_file_ptr = fopen(copy_file, mode);
+    //Allocate the memory to string, that will contain the name of file
+    char* file_name = (char*) calloc(strlen(FILE_NAME) + strlen(EXTENSION) + 1, sizeof(char));
 
-    if (log_file_ptr == nullptr)
+    //Check the correct functioning of the calloc()
+    if (file_name == nullptr)
     {
-        log_file_ptr = stderr;
+        fprintf(LOG_FILE_PTR, "ERROR! Program can NOT allocate memory in log.cpp\n");
+        return LOG_FILE_PTR;
     }
 
-    fprintf(log_file_ptr, "File is open\n");
+    file_name = strcpy(file_name, FILE_NAME);
 
-    return log_file_ptr;
+    file_name = strcat(file_name, EXTENSION);
+
+    //Open the file
+    LOG_FILE_PTR = fopen(file_name, mode);
+
+    //File opening check
+    if (LOG_FILE_PTR == nullptr)
+    {
+        LOG_FILE_PTR = stderr;
+        fprintf(LOG_FILE_PTR, "ERROR! Program can NOT open file %s.log\n", FILE_NAME);
+    }
+
+    fprintf(LOG_FILE_PTR, "=========FILE WAS OPENED AT %s=========\n", __TIME__);
+
+    free(file_name);
+
+    return LOG_FILE_PTR;
 }
 
-void CloseFile(FILE* log_file_ptr)
+void CloseFile(FILE* LOG_FILE_PTR)
 {
-    fprintf(log_file_ptr, "File is close\n");
-
-    fclose(log_file_ptr);
+    fprintf(LOG_FILE_PTR, "=========FILE WAS CLOSED AT %s=========\n", __TIME__);
+    fclose(LOG_FILE_PTR);
 }

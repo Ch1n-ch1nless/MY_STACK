@@ -5,6 +5,14 @@
 
 #include "errors.h"
 
+///Constant by which we increase the stack size
+const size_t STACK_SIZE_UP   = 2;
+
+///Constant by which reduce stack size
+const size_t STACK_SIZE_DOWN = 4;
+
+
+
 /**
  *@brief Construct the Stack
  *
