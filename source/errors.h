@@ -70,6 +70,6 @@ void PrintStkDataElemT(const Stack* stk, const size_t index);
  *
  *@return new hash of stack
  */
-hash_t  CalculateStkHash(const Stack* stk);
+hash_t CalculateStkHash(const Stack* stk);
 
 #endif // ERRORS_H_INCLUDED

@@ -189,17 +189,22 @@ error_t StackRealloc(Stack* stk)
     }
 
     //Allocate the new memory area
+    char* temp_ptr = nullptr; //temporary pointer
     #if defined WITH_CANARY
-        stk->data = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t) + 8);
+        temp_ptr = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t) + 2 * sizeof(canary_t) + 8);
     #else
-        stk->data = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t));
+        temp_ptr = (char*) realloc(stk->data, stk->capacity * sizeof(elem_t));
     #endif
 
     //Check the correct functioning of the realloc()
-    if (stk->data == nullptr)
+    if (temp_ptr == nullptr)
     {
         error |= MEM_ALLOC_ERR;
         PRINT_ERROR(stk, error)
+    }
+    else
+    {
+        stk->data = temp_ptr;
     }
 
     //Clean the data and fill all elements with a POISON_VALUE
