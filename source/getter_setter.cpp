@@ -15,7 +15,7 @@ canary_t GetStkDataOutro(const Stack* stk)
 
     char* char_ptr = stk->data + sizeof(canary_t) + stk->capacity * sizeof(elem_t);
     canary_t* canary_ptr = (canary_t*) char_ptr;
-    return canary_ptr[1];
+    return canary_ptr[0];
 }
 
 void SetStkDataIntro(Stack* stk, const canary_t intro_value)
@@ -32,7 +32,7 @@ void SetStkDataOutro(Stack* stk, const canary_t outro_value)
 
     char* char_ptr = stk->data + sizeof(canary_t) + stk->capacity * sizeof(elem_t);
     canary_t* canary_ptr = (canary_t*) char_ptr;
-    canary_ptr[1] = outro_value;
+    canary_ptr[0] = outro_value;
 }
 
 elem_t GetStkDataElemT(const Stack* stk, const size_t index)

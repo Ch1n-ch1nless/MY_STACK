@@ -1,0 +1,24 @@
+=========FILE WAS OPENED AT 17:55:51=========
+********ERROR********
+In source/main.cpp(10) called from source/stack.cpp(67) in function: StackDtor
+In stack->data value of right canary: 9EB16A55 != 6B16A55
+*********************
+=========FILE WAS CLOSED AT 17:55:51=========
+=========FILE WAS OPENED AT 17:55:51=========
+********ERROR********
+In source/main.cpp(10) called from source/stack.cpp(67) in function: StackDtor
+In stack->data value of right canary: 36B16A55 != 6B16A55
+*********************
+=========FILE WAS CLOSED AT 17:55:51=========
+=========FILE WAS OPENED AT 18:27:20=========
+********ERROR********
+In source/main.cpp(10) called from source/stack.cpp(137) in function: StackPop
+Size in Stack = 0
+*********************
+=========FILE WAS CLOSED AT 18:27:20=========
+=========FILE WAS OPENED AT 18:27:20=========
+********ERROR********
+In source/main.cpp(10) called from source/stack.cpp(137) in function: StackPop
+Size in Stack = 0
+*********************
+=========FILE WAS CLOSED AT 18:27:20=========
